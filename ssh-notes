@@ -1,0 +1,8 @@
+➜ ssh-keygen  -t  rsa  -b  4096  -C "username@gmail.com"
+➜ cat  ~/.ssh/ABC.pub
+➜ ssh-copy-id   -i   path_ABC.pub  userremote@hostremote
+➜ (remote)$ cat  ~/.ssh/authorized-keys
+➜ ssh  user@hostremote  -i  path_private_key_to_use.pem
+
+➜ssh-agent
+➜ssh-add path_private_key
