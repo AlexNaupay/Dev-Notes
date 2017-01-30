@@ -1,0 +1,8 @@
+# Montaje de particiones
+https://wiki.archlinux.org/index.php/Fstab_(Espa%C3%B1ol)
+
+Ejml:
+UUID=<uuid_diak> <mount_point> ext4 defaults,user 0 0
+
+$sudo blkid  // para saber la información de particiones
+$mount -a  //para releer /etc/fstab
