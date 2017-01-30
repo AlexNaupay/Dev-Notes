@@ -1,0 +1,5 @@
+# change mod for all files --recursive
+find <DIR|.> -type f -exec chmod 644 {} +
+
+#  change files and directories recursively
+chmod -R 755 ./**
