@@ -3,3 +3,36 @@ find <DIR|.> -type f -exec chmod 644 {} +
 
 #  change files and directories recursively
 chmod -R 755 ./**
+
+# recursive list 
+ls -R
+
+# find text into file
+grep -r <TEXT_SEARCH> <*|directory>
+
+# package's files
+dpkg -L <installed_package>
+
+# version SSOO - Debian
+lsb_release -a
+
+# on terminal
+CTRL+R : Search in history
+
+# search in history
+history | grep <command>
+
+# compress and decompress
+tar zcfv <file_name>tar.gz  <directory_to_compress>  // compress
+tar zxfv <file_name>tar.gz  //decompress
+gzip -d <file>.zip  //decompress
+zip <file>.zip <directory>  //compress
+
+# startup
+/etc/init.d/<binary_file>
+chkconfig <binary> <on|off>  // Ej: chkconfig httpd on //centos
+update-rc.d <binary> defaults //Debian
+
+# Services
+systemctl <status|start..> <service_name>  //centos
+service <service_name> <status|start..>  //debian
