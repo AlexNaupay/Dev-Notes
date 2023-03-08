@@ -1,0 +1,4 @@
+rethinkdb --bind all
+rethinkdb --join IP_OF_FIRST_MACHINE:29015 --bind all
+
+

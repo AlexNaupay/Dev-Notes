@@ -1,0 +1,114 @@
+https://switch2osm.org/serving-tiles/manually-building-a-tile-server-ubuntu-22-04-lts/
+https://download.geofabrik.de/south-america.html
+
+
+apt install screen locate libapache2-mod-tile renderd git tar unzip wget bzip2 apache2 lua5.1 mapnik-utils python3-mapnik python3-psycopg2 python3-yaml gdal-bin npm fonts-noto-cjk fonts-noto-hinted fonts-noto-unhinted fonts-unifont fonts-hanazono postgresql postgresql-contrib postgis osm2pgsql net-tools curl
+
+
+apt install postgresql-13-postgis-3 postgresql-13-postgis-3-scripts
+
+su -u postgres -i || su postgres (debian)
+    createuser _renderd
+    createdb -E UTF8 -O _renderd gis
+
+# While still working as the “postgres” user, set up PostGIS on the PostgreSQL database:
+psql
+    \c gis #You are now connected to database ‘gis’ as user ‘postgres’”.
+    CREATE EXTENSION postgis;
+    CREATE EXTENSION hstore;
+    ALTER TABLE geometry_columns OWNER TO _renderd;
+    ALTER TABLE spatial_ref_sys OWNER TO _renderd;
+    \q
+exit
+
+
+Mapnik
+----------------------------------------------------------------
+python3
+    import mapnik  #  Test correcta instalación
+
+
+Stylesheet configuration
+----------------------------------------------------------------
+mkdir src
+cd src
+git clone https://github.com/gravitystorm/openstreetmap-carto
+cd openstreetmap-carto
+carto -v
+carto project.mml > mapnik.xml
+
+Loading data
+----------------------------------------------------------------
+mkdir ~/data
+cd ~/data
+wget https://download.geofabrik.de/south-america/peru-latest.osm.pbf
+
+chmod o+rx ~
+/sbin/runuser -u _renderd -- osm2pgsql -d gis --create --slim  -G --hstore --tag-transform-script /home/eis/src/openstreetmap-carto/openstreetmap-carto.lua -C 6500 --number-processes 8 -S /home/eis/src/openstreetmap-carto/openstreetmap-carto.style /home/eis/data/peru-latest.osm.pbf
+    -d gis ... The database to work with (“gis” used to be the default; now it must be specified).
+    --slim ... osm2pgsql can use different table layouts; “slim” tables works for rendering.
+    -C 2500 ... Allocate 2.5 Gb of memory to osm2pgsql to the import process.
+    --number-processes 1  ... Use 1 CPU.
+
+
+cd ~/src/openstreetmap-carto/
+/sbin/runuser -u _renderd -- psql -d gis -f indexes.sql
+
+
+cd ~/src/openstreetmap-carto/
+sudo chown _renderd data
+#sudo -u _renderd scripts/get-external-data.py
+/sbin/runuser -u _renderd -- scripts/get-external-data.py
+
+cd ~/src/openstreetmap-carto/
+scripts/get-fonts.sh
+
+
+sudo nano /etc/renderd.conf
+
+sudo nano /usr/lib/systemd/system/renderd.service
+Environment=G_MESSAGES_DEBUG=all
+
+
+sudo systemctl daemon-reload
+sudo systemctl restart renderd
+sudo systemctl restart apache2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

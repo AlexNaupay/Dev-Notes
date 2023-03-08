@@ -1,0 +1,90 @@
+sudo apt-add-repository ppa:ansible/ansible
+
+ansible-inventory --list -y -i  [HOSTS_FILE]
+
+ansible all  -i [HOSTS_FILE] -m [ping] -u [same_as_control or user]  // m=ansible modules?
+
+ansible all -i [HOSTS_FILE] -a "[df -h]" -u root
+ansible all -m apt -a "name=vim state=latest" -u root  // module apt 
+
+ansible server1:server2 -m ping -u root  // select hosts
+
+
+ansible-playbook -i inventory playbook.yml
+
+
+
+ansible all -i inventory -m ping --private-key=~/.ssh/custom_id
+ansible all -m ping --ask-pass
+ansible all -m ping --ask-become-pass
+ansible server1 -i inventory -a "tail /var/log/nginx/error.log" --become
+ansible server1 -i inventory -a "tail /var/log/nginx/error.log" --become -[K or --ask-become-pass]
+
+ansible-playbook myplaybook.yml --start-at-task="Set Up Nginx"
+ansible-playbook myplaybook.yml --tags=mysql,nginx
+ansible-playbook myplaybook.yml --skip-tags=mysql
+
+ansible-playbook -l dev -i inventory playbook.yml  // limit to group or host
+ansible-playbook -i inventory playbook.yml -v  // verbose
+
+
+ansible-vault create credentials.yml
+ansible-vault view credentials.yml
+ansible-vault edit credentials.yml
+ansible-vault decrypt credentials.yml
+
+
+ansible all -i inventory -m apt -a "name=nginx" --become -K  // install
+ansible all -i inventory -m apt -a "name=nginx state=absent" --become  -K  // remove
+ansible all -i inventory -m copy -a "src=./file.txt dest=~/myfile.txt"
+ansible all -i inventory -m copy -a "src=~/myfile.txt remote_src=yes dest=./file.txt"
+ansible all -i inventory -m file -a "dest=/var/www/file.txt mode=600 owner=sammy group=sammy" --become  -K
+ansible webservers -i inventory -m service -a "name=nginx state=restarted" --become  -K  // restart service
+ansible webservers -i inventory -a "/sbin/reboot"  --become  -K
+
+ansible server1 -i inventory -m setup
+ansible server1 -i inventory -m setup -a "gather_subset=min"
+ansible server1 -i inventory -m setup -a "filter=*ipv*"
+
+
+
+
+Example of inventory file
+[web_dev]
+203.0.113.111
+
+[web_prod]
+203.0.113.112
+
+[db_dev]
+203.0.113.113
+
+[db_prod]
+server_hostname
+
+[webservers:children]
+web_dev
+web_prod
+
+[dbservers:children]
+db_dev
+db_prod
+
+[development:children]
+web_dev
+db_dev
+
+[production:children]
+web_prod
+db_prod
+
+
+Pattern	Result  Target
+all     	    All Hosts from your inventory file
+host1           A single host (host1)
+host1:host2	    Both host1 and host2
+group1	        A single group (group1)
+group1:group2	All servers in group1 and group2
+group1:\&group2	Only servers that are both in group1 and group2
+group1:\!group2	Servers in group1 except those also in group2
+

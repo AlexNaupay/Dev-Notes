@@ -1,0 +1,19 @@
+https://cpriego.github.io/valet-linux/requirements
+
+https://styde.net/instalacion-de-laravel-valet-en-linux/
+
+
+
+composer global require cpriego/valet-linux
+
+# en .bashrc
+export PATH="$PATH:$HOME/.composer/vendor/bin"
+
+valet install
+valet park //estando en el directorio
+valet domain mydomain
+
+valet secure valet-linux-styde
+valet unsecure valet-linux-styde
+valet share
+    valet share no funciona en proyectos que estén siendo servidos usando TLS
