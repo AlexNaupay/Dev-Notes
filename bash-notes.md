@@ -16,6 +16,19 @@
 
 ## ver conexiones ssh a host
     netstat -ap | grep 'ESTABLISHED.*ssh'
+   
+## ver puertos, etc en uso 
+    sudo netstat -tulpn
+
+    Este comando mostrará una lista de todas las conexiones de red activas en tu sistema, junto con el proceso que las está utilizando y el puerto que están usando. Aquí está lo que significan las opciones de este comando:
+
+        -t: muestra sólo las conexiones de red TCP (Protocolo de Control de Transmisión).
+        -u: muestra sólo las conexiones de red UDP (Protocolo de Datagrama de Usuario).
+        -l: muestra sólo las conexiones de red que están escuchando en algún puerto.
+        -p: muestra el proceso que está utilizando la conexión.
+        -n: muestra los números de puerto en lugar de los nombres de servicio.
+
+    Usando estas opciones, el comando netstat -tulpn te mostrará una lista de todos los servicios y puertos que están en uso en tu sistema Debian.
 
 ## find text into file
     grep -r <TEXT_SEARCH> <.|directory>
