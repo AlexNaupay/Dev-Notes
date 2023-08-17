@@ -61,7 +61,9 @@ lxc file push {/path/to/file} {continer-nane}/path/to/dest/dir/
 
 lxc config set [container_name] limits.memory 512MB  
 
-
-
-
+Troubleshooting
+====================================================================================
+1.  LXD containers are unable to access the internet while the host has internet connectivity
+    Reset firewall profile settings
+2. 
 

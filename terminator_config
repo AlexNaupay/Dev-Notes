@@ -1,3 +1,4 @@
+# .config/terminator/config
 [global_config]
   enabled_plugins = CustomCommandsMenu, InactivityWatch, ActivityWatch, TerminalShot, LaunchpadCodeURLHandler, LaunchpadBugURLHandler
 [keybindings]
