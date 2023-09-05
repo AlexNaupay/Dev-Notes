@@ -67,3 +67,17 @@ Troubleshooting
     Reset firewall profile settings
 2. 
 
+
+Move container to other host
+====================================================================================
+Turning a container into an image
+lxc publish MY_CONTAINER_NAME --alias my-new-image-name
+
+Exporting images
+lxc image export MY_NEW_IMAGE_NAME /EXPORTING_PATH.tar.xz
+
+Import image from tarball
+lxc image import IMPORTING_IMAGE.tar.gz --alias ALIAS_IMAGE
+
+Lounch from your own image
+lxc launch ALIAS_IMAGE NEW_CONTAINER_NAME
