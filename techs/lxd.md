@@ -70,6 +70,8 @@ Troubleshooting
 
 Move container to other host
 ====================================================================================
+https://ubuntu.com/blog/lxd-2-0-image-management-512
+
 Turning a container into an image
 lxc publish MY_CONTAINER_NAME --alias my-new-image-name
 
@@ -81,3 +83,4 @@ lxc image import IMPORTING_IMAGE.tar.gz --alias ALIAS_IMAGE
 
 Lounch from your own image
 lxc launch ALIAS_IMAGE NEW_CONTAINER_NAME
+
