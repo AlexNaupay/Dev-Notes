@@ -32,3 +32,26 @@ connections.js and sessions.js
 ```
 url: 'mongodb://usuario:contraseña@hostname1:27017,hostname2:27017,hostname3:27017/base_de_datos?replicaSet=nombre_del_replica_set&readPreference=secondary',
 ```
+
+
+# Export and Import
+
+### mongoexport
+`mongodump --db db_name --out folder_bson_files`
+
+`mongodump --db db_name --archive=archive_path.gz`
+
+ || Latest versions ||
+
+
+`mongodump --nsInclude="db_name.*" --archive=archive_path.gz`
+
+
+
+### mongoimport
+`mongorestore --db db_name --drop folder_bson_files`
+
+`mongorestore --db db_name --archive=archive_path.gz`
+
+`mongorestore [--nsInclude="db_name.*"] --archive=archive_path.gz`
+
