@@ -59,7 +59,8 @@ lxc file pull {continer-nane}/{path/to/file} {/path/to/local/dest}
 lxc file push {/path/to/file} {continer-nane}/path/to/dest/dir/
 
 
-lxc config set [container_name] limits.memory 512MB  
+lxc config set [container_name] limits.memory 512MB
+lxc config set [container_name] limits.cpu 2
 
 Troubleshooting
 ====================================================================================
