@@ -37,7 +37,9 @@
     dpkg -L <installed_package>
 
 ## version SSOO - Debian
-    lsb_release -a
+`lsb_release -a`
+
+`cat /etc/os-release`
 
 ## on terminal
     CTRL+R : Search in history
@@ -118,7 +120,13 @@
     pm2 save
     pm2 unstartup systemd
 
+## Network centos
+`nmcli d`
+
+`vi /etc/sysconf ig/network-scripts/ifcfg-[network_device_name`
+
+ONBOOT="yes"
 
 
-
+## Size of folders
 
