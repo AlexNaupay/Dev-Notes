@@ -130,3 +130,10 @@ ONBOOT="yes"
 
 ## Size of folders
 
+`du [options] [directory/file]`
+
+`du -sh [directory]/*  # -s: summary, /* List directories` 
+
+
+
+
