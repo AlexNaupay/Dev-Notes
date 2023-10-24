@@ -89,3 +89,6 @@ Lounch from your own image
 
 `lxc launch ALIAS_IMAGE NEW_CONTAINER_NAME`
 
+
+## Attach from server to container
+`lxc-attach -n <ID_CONTAINER>`
