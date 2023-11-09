@@ -61,3 +61,12 @@ STOP SLAVE;
 SET GLOBAL SQL_SLAVE_SKIP_COUNTER = 1; 
 START SLAVE;
 ```
+
+#### Time zone
+```sql
+SELECT @@global.time_zone;
+SET GLOBAL time_zone = 'America/Lima'
+
+SELECT @@session.time_zone;
+SET time_zone = 'America/Lima'
+ ```
