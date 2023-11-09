@@ -65,8 +65,8 @@ START SLAVE;
 #### Time zone
 ```sql
 SELECT @@global.time_zone;
-SET GLOBAL time_zone = 'America/Lima'
+SET GLOBAL time_zone = '-5:00'
 
 SELECT @@session.time_zone;
-SET time_zone = 'America/Lima'
+SET time_zone = '-5:00'
  ```
