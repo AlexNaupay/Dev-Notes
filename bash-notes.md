@@ -129,6 +129,12 @@ ONBOOT="yes"
 
 
 ## Size of folders
+`du -sh *`
+
+`du -sh PATH/*`
+
+`du -sh PATH`
+
 
 `du [options] [directory/file]`
 
