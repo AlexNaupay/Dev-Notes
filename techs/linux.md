@@ -16,4 +16,9 @@ export LANG=en_US.UTF-8
 dpkg-reconfigure locales
 ```
 
+### Packages and versions
+```bash
+apt-cache madison <package-search>
+apt install <packahe-name>=<version>
+```
 
