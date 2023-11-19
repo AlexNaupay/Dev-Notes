@@ -22,3 +22,8 @@ apt-cache madison <package-search>
 apt install <packahe-name>=<version>
 ```
 
+
+### Packages and versions
+```bash
+nohup rsync -avz --partial --info=progress2 JAVA_11/ test/ > salida_rsync.log 2>&1 &
+```
