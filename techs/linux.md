@@ -23,7 +23,8 @@ apt install <packahe-name>=<version>
 ```
 
 
-### Packages and versions
+### Nohup
 ```bash
-nohup rsync -avz --partial --info=progress2 JAVA_11/ test/ > salida_rsync.log 2>&1 &
+nohup <COMMAND> > nohup.log 2>&1 &
+nohup rsync -avz --partial --info=progress2 SOURCE_PATH/ TARGET_PATH/ > nohup.log 2>&1 &
 ```
