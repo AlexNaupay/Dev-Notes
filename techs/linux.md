@@ -28,3 +28,19 @@ apt install <packahe-name>=<version>
 nohup <COMMAND> > nohup.log 2>&1 &
 nohup rsync -avz --partial --info=progress2 SOURCE_PATH/ TARGET_PATH/ > nohup.log 2>&1 &
 ```
+
+### Debian old packages
+```bash
+nano /etc/apt/sources.list
+
+deb http://archive.debian.org/debian/ jessie main non-free contrib
+deb-src http://archive.debian.org/debian/ jessie main non-free contrib
+deb http://archive.debian.org/debian-security/ jessie/updates main non-free contrib
+deb-src http://archive.debian.org/debian-security/ jessie/updates main non-free contrib
+
+apt-get install debian-archive-keyring
+apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com 7638D0442B90D010
+apt update
+apt upgrade
+dpkg-reconfigure locales
+```
