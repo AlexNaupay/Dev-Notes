@@ -9,6 +9,7 @@
 
 ## TUNEL SSH
     ssh [-L|-R] origin_host:origin_port:dest_host:dest_pot remote_user@remote_host
+    ssh [-L|-R] source_bind_host:source_bind_port:DEST_FINAL_HOST:DEST_FINAL_PORT remote_user@remote_reachable_host
     ssh -N -L local_port:127.0.0.1:remote_port remote_user@remote_ip
         Then: mysql -u mysql_remote_user -h 127.0.0.1 -P local_port -p
         Don't use localhost
