@@ -13,6 +13,9 @@
 ```bash
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+ln -s /sbin/locale-gen /bin/locale-gen
+ln -s /sbin/update-locale /bin/update-locale
+
 dpkg-reconfigure locales
 ```
 

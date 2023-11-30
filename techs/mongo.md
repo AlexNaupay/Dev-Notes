@@ -55,3 +55,21 @@ url: 'mongodb://usuario:contraseña@hostname1:27017,hostname2:27017,hostname3:27
 
 `mongorestore [--nsInclude="db_name.*"] --archive=archive_path.gz`
 
+
+### enable auth adn root user
+```javascript
+use admin
+db.createUser({ user: "root", pwd: "a_strong_password", roles: ["root"]})
+
+use mydatabase
+db.createUser({ user: "user", pwd: "userpass", roles: [{ role: "dbAdmin", db: "mydatabase" }, { role: "readWrite", db: "mydatabase" } ]})
+
+```
+```bash
+nano /etc/mongod.conf
+security:
+  authorization: enabled
+```
+
+
+`mongosh --host localhost --port 27017 --username user --password "pass" --authenticationDatabase admin`
