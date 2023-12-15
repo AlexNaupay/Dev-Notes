@@ -12,3 +12,10 @@ click the Backup Now option. Set the target location to None, Mode to Stop, and 
     `qemu-img convert -f raw -O vdi RAW_PATH.raw VDI_PATH.vdi`
 
 
+# Install qemu-guest-agent on vm
+
+```bash
+apt install qemu-guest-agent
+systemctl start qemu-guest-agent
+systemctl enable qemu-guest-agent
+```
