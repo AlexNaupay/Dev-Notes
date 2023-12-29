@@ -1,6 +1,11 @@
 # Install
 
 ```bash
+
+timedatectl set-timezone America/Lima
+apt install -y ca-certificates gnupg curl nano lsb-release wget
+
+apt update
 export CODENAME=`lsb_release -cs`
 echo "deb https://download.rethinkdb.com/repository/debian-$CODENAME $CODENAME main" | tee /etc/apt/sources.list.d/rethinkdb.list
 wget -qO- https://download.rethinkdb.com/repository/raw/pubkey.gpg | apt-key add -
