@@ -47,3 +47,12 @@ apt update
 apt upgrade
 dpkg-reconfigure locales
 ```
+
+### History
+```bash
+export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
+export HISTSIZE=5000
+```
+
+### Add user to group
+`usermod -a -G groupname username`
