@@ -56,3 +56,13 @@ export HISTSIZE=5000
 
 ### Add user to group
 `usermod -a -G groupname username`
+
+
+### Sury: php, etc
+```bash
+apt  install software-properties-common ca-certificates lsb-release apt-transport-https wget gnupg
+sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/sury.list'
+wget -qO - https://packages.sury.org/php/apt.gpg | apt-key add -
+apt update
+export HISTSIZE=5000
+```
