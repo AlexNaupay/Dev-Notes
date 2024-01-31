@@ -4,6 +4,15 @@
 ##  change files and directories recursively
     chmod -R 755 ./**
 
+##  change mod for directories recursively
+find <DIR|.> -type d -exec chmod 755 {} \;
+
+##  delete files recursively
+find <DIR|.> -type f -name "*.sql" -delete
+
+##  list files recursively
+find <DIR|.> -type f -name "*.sql"
+
 ## recursive list 
     ls -R
 
@@ -143,3 +152,16 @@ ONBOOT="yes"
 rsync -avz --partial --exclude '*/ubifoto1/' --exclude '*/ubifoto2/' --exclude '*/helicorders/' root@10.10.210.48:/data/paginasweb/fotos-tiempo-real/* .
 
 
+### Permissions fro laravel projects
+```bash
+chown -R www-data:www-data /path/to/your/laravel/root/directory
+usermod -a -G www-data ftp_user # if you have ftp user
+
+cd LARAVEL_PROJECT
+chown -R $USER:www-data .
+find . -type f -exec chmod 644 {} \;
+find . -type d -exec chmod 755 {} \;
+
+chgrp -R www-data storage bootstrap/cache
+chmod -R ug+rwx storage bootstrap/cache
+```
