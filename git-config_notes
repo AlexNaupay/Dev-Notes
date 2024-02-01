@@ -7,3 +7,4 @@ git rm --cached debug.log
 git commit -m "Start ignoring debug.log"
 
 
+git -c http.sslVerify=false clone https://SERVER/repo-name.git
