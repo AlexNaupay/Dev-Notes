@@ -23,6 +23,9 @@ find <DIR|.> -type f -name "*.sql"
     sed -i 's/old_string/new_string/g' *
     sed -i 's/UtilsService.log/sails.log.debug/g' * 
 
+## Replace text recursively
+find DIR -type f -name "*.php" -exec grep -Iq 'CURRENT_WORD' {} \; -exec sed -i 's/CURRENT_WORD/NEW_WORD/g' {} \;
+
 ## ver conexiones ssh a host
     netstat -ap | grep 'ESTABLISHED.*ssh'
    
