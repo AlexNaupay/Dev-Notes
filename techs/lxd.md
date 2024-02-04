@@ -8,6 +8,8 @@ lxc network show [lxdbr0]
 lxc storage list
 lxc storage show [nixcraftzfs]
 
+lxc network set [netname] raw.dnsmasq dhcp-option=6,8.8.8.8,8.8.4.4  #6 means dns 
+
 
 Listing built-in LXD image for various Linux distros
 lxc image list images:
