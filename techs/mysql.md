@@ -70,3 +70,13 @@ SET GLOBAL time_zone = '-5:00'
 SELECT @@session.time_zone;
 SET time_zone = '-5:00'
  ```
+
+
+ #### Install mysql old version mysql 5.7
+```sql
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.18-1_all.deb
+dpkg -i mysql-apt-config_0.8.18-1_all.deb
+apt update
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys NO_PUBKEY
+apt install mysql-community-server
+ ```
