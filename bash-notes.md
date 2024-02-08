@@ -30,7 +30,8 @@ find DIR -type f -name "*.php" -exec grep -Iq 'CURRENT_WORD' {} \; -exec sed -i 
     netstat -ap | grep 'ESTABLISHED.*ssh'
    
 ## ver puertos, etc en uso 
-    sudo netstat -tulpn
+    netstat -tulpn
+    ss -tulpnr
 
     Este comando mostrará una lista de todas las conexiones de red activas en tu sistema, junto con el proceso que las está utilizando y el puerto que están usando. Aquí está lo que significan las opciones de este comando:
 
