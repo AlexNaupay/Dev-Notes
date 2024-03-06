@@ -169,3 +169,26 @@ find . -type d -exec chmod 755 {} \;
 chgrp -R www-data storage bootstrap/cache
 chmod -R ug+rwx storage bootstrap/cache
 ```
+
+### sftp Jailed user
+```bash
+/sbin/groupadd sftp_users
+/sbin/useradd -G sftp_users -s /sbin/nologin -m USER
+mkdir files # on user_home
+chown root:root /home/USER # Important!!!!!!!!!!!!! root owner
+chmod 700 files
+/sbin/usermod -d /files USER
+
+
+nano /etc/ssh/sshd_config
+
+Comment: Subsystem   sftp    /usr/lib/openssh/sftp-server
+
+Add:
+Subsystem sftp internal-sftp
+Match Group sftp_users
+  X11Forwarding no
+  AllowTcpForwarding no
+  ChrootDirectory /home/%u
+  ForceCommand internal-sftp
+```
