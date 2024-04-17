@@ -57,6 +57,11 @@ export HISTSIZE=5000
 ### Add user to group
 `usermod -a -G groupname username`
 
+### Disks and partitions
+```bash
+sudo lsblk
+df -h
+```
 
 ### Sury: php, etc
 ```bash
