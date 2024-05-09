@@ -19,3 +19,10 @@ apt install qemu-guest-agent
 systemctl start qemu-guest-agent
 systemctl enable qemu-guest-agent
 ```
+
+
+WARNING: Device /dev/dm-42 not initialized in udev database even after waiting 10000000 microseconds.
+Disk not found
+```bash
+udevadm trigger
+```
