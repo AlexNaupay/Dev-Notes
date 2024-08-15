@@ -192,3 +192,11 @@ Match Group sftp_users
   ChrootDirectory /home/%u
   ForceCommand internal-sftp
 ```
+
+### goaccess
+
+https://github.com/allinurl/goaccess
+
+```bash
+goaccess access.log -a --log-format=COMBINED --date-format=%d/%b/%Y --time-format=%T -o report.html
+```
