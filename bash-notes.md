@@ -200,3 +200,9 @@ https://github.com/allinurl/goaccess
 ```bash
 goaccess access.log -a --log-format=COMBINED --date-format=%d/%b/%Y --time-format=%T -o report.html
 ```
+
+### qemu 
+
+```bash
+qm shutdown <VMID>
+```
