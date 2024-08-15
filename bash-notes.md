@@ -204,5 +204,6 @@ goaccess access.log -a --log-format=COMBINED --date-format=%d/%b/%Y --time-forma
 ### qemu 
 
 ```bash
-qm shutdown <VMID>
+qm shutdown <VMID>  # Graceful
+qm stop <VMID>  # Forceful
 ```
