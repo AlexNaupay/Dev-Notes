@@ -71,6 +71,9 @@ find DIR -type f -name "*.php" -exec grep -Iq 'CURRENT_WORD' {} \; -exec sed -i 
 
 ## ver historial de inicios del sistema
     last  // ver historial de inicios del sistema
+    journalctl --list-boots
+    last reboot|shutdown
+
 
 ## Functions
     function debiantest() { ( cd ~/vagrantvms/debian78test && vagrant $* ) }
