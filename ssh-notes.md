@@ -25,5 +25,5 @@
     ssh -XC user@server
 
 
-## Traer render de ventanas
-
+## Increase iddle time
+`ssh -o "ServerAliveInterval 60" USER@HOST`
