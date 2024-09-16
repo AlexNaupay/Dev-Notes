@@ -83,7 +83,7 @@ cat /proc/net/dev
 ls /sys/class/net/
 ```
 
-```
+```conf
 # The loopback network interface
 auto lo
 iface lo inet loopback

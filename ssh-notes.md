@@ -25,3 +25,5 @@
     ssh -XC user@server
 
 
+## Traer render de ventanas
+
