@@ -71,3 +71,41 @@ wget -qO - https://packages.sury.org/php/apt.gpg | apt-key add -
 apt update
 export HISTSIZE=5000
 ```
+
+
+### A server with multiple network interfaces
+```bash
+# Show interfaces
+ip addr
+nmcli device status
+netstat -i
+cat /proc/net/dev
+ls /sys/class/net/
+```
+
+```
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+allow-hotplug ens18
+iface ens18 inet static
+	address 10.10.1.124/24
+	network 10.10.1.0
+        up ip route add 10.10.0.0/16 via 10.10.1.1 dev ens18
+        down ip route del 10.10.0.0/16 via 10.10.1.1 dev ens18
+
+allow-hotplug ens19
+iface ens19 inet static
+    address 50.50.1.124/24
+    network 50.50.1.0
+
+# Interface to connect to internet
+allow-hotplug ens20
+iface ens20 inet static
+	address 192.168.1.124/24
+    network 192.168.1.0
+	gateway 192.168.1.1
+	dns-nameservers 8.8.8.8 8.8.4.4 1.1.1.1
+```
