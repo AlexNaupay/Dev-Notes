@@ -109,3 +109,29 @@ iface ens20 inet static
 	gateway 192.168.1.1
 	dns-nameservers 8.8.8.8 8.8.4.4 1.1.1.1
 ```
+
+### My public IP
+```bash
+# Install dnsutils
+apt install dnsutils
+
+# dig=domain information groper
+dig +short txt ch whoami.cloudflare @1.0.0.1
+
+dig +short myip.opendns.com @resolver1.opendns.com
+
+dig TXT +short o-o.myaddr.l.google.com @ns1.google.com
+
+dig +short txt ch whoami.cloudflare @1.0.0.1
+
+# IPv6
+dig -6 TXT +short o-o.myaddr.l.google.com @ns1.google.com
+
+host myip.opendns.com resolver1.opendns.com
+
+curl checkip.amazonaws.com
+curl ifconfig.me
+curl icanhazip.com
+curl ipecho.net/plain
+curl ifconfig.co
+```
