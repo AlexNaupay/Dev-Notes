@@ -28,3 +28,19 @@ docker run --name debian11 --rm -d -p 1347:1347 -it debian:11 /bin/bash
 docker exec -it <container_name> bash
 ```
 
+
+## Dockerfile Example
+```bash
+FROM debian:11
+VOLUME ["HOST_DIR", "CONTAINER_DIR"]
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+RUN wget https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64 -O /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
+WORKDIR /app
+COPY . .
+RUN chmod +x ./start.sh
+CMD ["./start.sh"]
+```
