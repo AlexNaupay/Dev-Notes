@@ -9,7 +9,8 @@ docker run --name CONTAINER_NAME -d -p HOST_PORT:CONTAINER_PORT IMAGE_NAME
 docker ps -a --size
 docker stats CONTAINER 
 docker exec -it CONTAINER bash
-docker logs -f CONTAINER 
+docker logs -f CONTAINER
+docker inspect CONTAINER
 
 ```
 
