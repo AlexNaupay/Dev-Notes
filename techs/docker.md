@@ -12,6 +12,15 @@ docker exec -it CONTAINER bash
 docker logs -f CONTAINER
 docker inspect CONTAINER
 
+# Save/load image
+docker save -o FILE_TARGET.tar IMAGE_NAME 
+docker save IMAGE_NAME > IMAGE_NAME.tar
+docker load -i FILE_SOURCE.tar
+
+# Export/import container
+docker export -o CONTAINER_NAME_TARGET.tar CONTAINER
+docker import CONTAINER_NAME_TARGET.tar
+
 ```
 
 ## Docker utils
