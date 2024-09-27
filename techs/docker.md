@@ -1,3 +1,20 @@
+# Docker commands
+```bash
+docker build -t NAME:TAG [-f FILE.dockerfile] <.|PATH>
+# docker build -t redis-stack -f redis-stack.dockerfile .
+
+docker run --name CONTAINER_NAME -d -p HOST_PORT:CONTAINER_PORT IMAGE_NAME
+#docker run --name redis-stack -d -p 6379:6379 redis/redis-stack-server:latest
+
+docker ps -a --size
+docker stats CONTAINER 
+docker exec -it CONTAINER bash
+docker logs -f CONTAINER 
+
+```
+
+## Docker utils
+```bash
 docker run --name --rm -d redis-stack -p 6379:6379  redis/redis-stack-server:latest
 
 docker run --name mariadb --rm -d -v /Users/eis/Storage/docker-storage/mysql-data:/var/lib/mysql -e MARIADB_ROOT_PASSWORD=_alexh -p 3306:3306  mariadb
@@ -9,3 +26,5 @@ docker run --name minio --rm -d -p 9000:9000 -p 9001:9001 -v /Users/eis/Storage/
 docker run --name debian --rm -d -it debian /bin/bash
 docker run --name debian11 --rm -d -p 1347:1347 -it debian:11 /bin/bash
 docker exec -it <container_name> bash
+```
+
