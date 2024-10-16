@@ -26,3 +26,9 @@ Disk not found
 ```bash
 udevadm trigger
 ```
+
+## Restore from backup file 
+
+```bash
+qmrestore vzdump-qemu-140-2024_09_24-12_09_39.vma.zst 140
+```
