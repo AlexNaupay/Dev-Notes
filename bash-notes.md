@@ -175,17 +175,20 @@ chmod -R ug+rwx storage bootstrap/cache
 
 ### sftp Jailed user
 ```bash
+# As root user
 /sbin/groupadd sftp_users
 /sbin/useradd -G sftp_users -s /sbin/nologin -m USER
-mkdir files # on user_home
+passwd USER
+mkdir FILES # on user_home
 chown root:root /home/USER # Important!!!!!!!!!!!!! root owner
-chmod 700 files
-/sbin/usermod -d /files USER
-
+chmod 700 FILES
+/sbin/usermod -d /FILES USER
+chown -R USER FILES
 
 nano /etc/ssh/sshd_config
 
-Comment: Subsystem   sftp    /usr/lib/openssh/sftp-server
+Comment: 
+# Subsystem   sftp    /usr/lib/openssh/sftp-server
 
 Add:
 Subsystem sftp internal-sftp
