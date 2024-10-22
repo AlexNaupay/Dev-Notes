@@ -1,4 +1,12 @@
 ## Generate ssh key
+
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+# Legacy
+ssh-keygen  -t  rsa  -b  4096  -C "username@gmail.com"
+
+```
     ➜ ssh-keygen  -t  rsa  -b  4096  -C "username@gmail.com"
     ➜ cat  ~/.ssh/ABC.pub
 
