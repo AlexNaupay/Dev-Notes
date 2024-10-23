@@ -36,4 +36,6 @@ ufw enable
 ufw status verbose
 ufw status numbered
 ufw disable
+
+ufw reset  # you want to start over
 ```
