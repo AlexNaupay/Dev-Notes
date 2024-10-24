@@ -197,6 +197,11 @@ Match Group sftp_users
   AllowTcpForwarding no
   ChrootDirectory /home/%u
   ForceCommand internal-sftp
+
+Example:
+# :path after ChrootDirectory (It means real path: /home/user/images)
+scp -i my-ssh.key test.png user@10.10.72.25:/images/ 
+
 ```
 
 ### goaccess
