@@ -25,6 +25,7 @@ ufw deny from 203.0.113.4
 
 # outgoing
 ufw deny out 25  # outbound connections to port 25
+ufw allow out to 172.18.0.0/16  # outgoing connections to 172.18.0.0/16
 ufw allow out to 192.168.18.61 port 8080
 ufw allow out proto tcp to 127.0.0.1 port 8080,3000,9001,8090
 
