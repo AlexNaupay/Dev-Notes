@@ -35,3 +35,7 @@ ssh-keygen  -t  rsa  -b  4096  -C "username@gmail.com"
 
 ## Increase iddle time
 `ssh -o "ServerAliveInterval 60" USER@HOST`
+
+
+## Delete mapped host
+`ssh-keygen -f "/Users/eis/.ssh/known_hosts" -R "10.10.72.2"`
