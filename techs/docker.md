@@ -54,3 +54,15 @@ COPY . .
 RUN chmod +x ./start.sh
 CMD ["./start.sh"]
 ```
+
+## Docker Swarm
+```bash
+docker swarm init
+docker swarm join-token manager
+docker node ls
+docker node inspect self
+docker node inspect lv81fdas0w17izk6er5f984ba
+docker node inspect --pretty self
+docker swarm leave
+docker swarm leave --force 
+```
