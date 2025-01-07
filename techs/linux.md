@@ -135,3 +135,10 @@ curl icanhazip.com
 curl ipecho.net/plain
 curl ifconfig.co
 ```
+
+### Virtualbox
+```bash
+VBoxManage startvm "VM name" --type headless
+VBoxHeadless --startvm <uuid|name>
+VBoxManage controlvm <uuid|name> acpipowerbutton
+```
