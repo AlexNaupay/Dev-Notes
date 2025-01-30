@@ -31,4 +31,7 @@ git commit -S -m "My commit message"
 
 # Sign all Git commits by default by running this command:
 git config --global commit.gpgsign true
+
+# gpg: signing failed: Inappropriate ioctl for device
+export GPG_TTY=$(tty)
 ```
