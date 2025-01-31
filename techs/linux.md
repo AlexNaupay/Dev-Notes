@@ -142,3 +142,6 @@ VBoxManage startvm "VM name" --type headless
 VBoxHeadless --startvm <uuid|name>
 VBoxManage controlvm <uuid|name> acpipowerbutton
 ```
+
+### Append a line of text to a file by using the >> operator:
+`echo "hello world" >> my_file.txt`
