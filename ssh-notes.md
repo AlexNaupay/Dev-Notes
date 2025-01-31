@@ -39,3 +39,23 @@ ssh-keygen  -t  rsa  -b  4096  -C "username@gmail.com"
 
 ## Delete mapped host
 `ssh-keygen -f "/Users/eis/.ssh/known_hosts" -R "10.10.72.2"`
+
+## Remote commands
+```bash
+ssh usuario@servidor "comando1; comando2 && comando3 || echo 'falló'"
+#;: Ejecuta los comandos secuencialmente (aunque uno falle).
+#&&: Ejecuta el siguiente comando solo si el anterior tuvo éxito.
+#||: Ejecuta el siguiente comando solo si el anterior falló.
+
+ssh usuario@servidor << 'EOF'
+  comando1
+  comando2
+  if [ condicion ]; then
+    comando3
+  fi
+EOF
+# << 'EOF': Las variables no se expanden localmente (usa comillas para desactivar expansión).
+# << EOF (sin comillas): Las variables se expanden en tu máquina local antes de enviarse.
+
+cat script_local.sh | ssh usuario@servidor bash
+```
