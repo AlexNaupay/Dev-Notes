@@ -218,3 +218,27 @@ goaccess access.log -a --log-format=COMBINED --date-format=%d/%b/%Y --time-forma
 qm shutdown <VMID>  # Graceful
 qm stop <VMID>  # Forceful
 ```
+
+### Redirections
+
+```bash
+command >> file  # Add stout
+command 2> file  # Put stderr 
+
+#redirecciona stderr hacía donde stdout apunte, y stdout apunta al archivo "file"
+command > file 2>&1 # Put stderr or stdout command &> file
+
+comando > salidaok.txt 2> errores.txt
+
+(date ; pwd) > file # Using sub shells
+
+# <<: HERE-DOCUMENT  : Texto interpretado por comando
+wc <<end
+uno dos tres
+cuatro cinco
+end
+
+# <<<: HERE-STRNIG  : Interpretado como un argumento(s)
+bc <<< 5*5
+```
+
