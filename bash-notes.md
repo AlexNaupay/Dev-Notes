@@ -9,6 +9,7 @@ find <DIR|.> -type d -exec chmod 755 {} \;
 
 ##  delete files recursively
 find <DIR|.> -type f -name "*.sql" -delete
+find . -type d -name node_modules -exec rm -rf {} \;
 
 ##  list files recursively
 find <DIR|.> -type f -name "*.sql"
