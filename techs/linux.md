@@ -145,3 +145,12 @@ VBoxManage controlvm <uuid|name> acpipowerbutton
 
 ### Append a line of text to a file by using the >> operator:
 `echo "hello world" >> my_file.txt`
+
+### Config for .vimrc
+```bash
+set showmode
+set autoindent
+set tabstop=4
+set expandtab
+syntax on
+```
