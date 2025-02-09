@@ -1,0 +1,19 @@
+# A simple example of ClusterConfig object:
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: k8s-cluster
+  region: us-west-2
+
+managedNodeGroups:
+  - name: k8s-worker-nodes
+    instanceType: t3.medium
+    desiredCapacity: 2
+
+cloudWatch:
+    clusterLogging:
+        # enable specific types of cluster control plane logs
+        enableTypes: ["audit", "authenticator", "controllerManager"]
+        logRetentionInDays: 5

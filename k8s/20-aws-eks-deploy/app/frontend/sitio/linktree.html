@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<title>Links Website</title>
+<script src="https://unpkg.com/feather-icons"></script>
+
+<style>
+/* Background with a subtle gradient to represent a cloud/tech theme */
+body {
+  background: url("https://static.platzi.com/media/kubernetes-2024-course-ai.jpeg"); /* The image used for background */
+  background-size: cover; /* Cover the entire viewport */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent image from repeating */
+  min-height: 100vh; /* Ensure full viewport height coverage */
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); /* Dark overlay for better contrast */
+  z-index: 1;
+}
+
+/* Container styling */
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Links container */
+.links-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.links-container a {
+  width: 80%;
+  margin: 10px 0;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: rgba(37, 99, 235, 0.9); /* Semi-transparent bright blue */
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.links-container a:hover {
+  background-color: rgba(52, 211, 153, 0.9); /* Semi-transparent green */
+  color: #ffffff;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Section headers */
+h4 {
+  color: #ffffff; /* White for better visibility */
+  font-size: 22px;
+  margin-top: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Profile image and name */
+img {
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 0 15px rgba(52, 211, 153, 0.5);
+}
+
+.name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: rgba(30, 58, 138, 0.9);
+  padding: 5px 15px;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 10px 0;
+  backdrop-filter: blur(5px);
+}
+
+/* Bottom section */
+.bottom {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.bottom span {
+  color: #34d399;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.bottom svg {
+  stroke: #34d399;
+  fill: none;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+/* Responsive design */
+@media (min-width: 768px) {
+  .links-container a {
+    width: 60%;
+  }
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+</style>
+</head>
+<body>
+  <!-- Content container -->
+  <div class="container">
+
+    <!-- Image and name container -->
+    <div>
+      <img src="https://avatars.githubusercontent.com/u/13629408?s=200&v=4" alt="image" width="150px" height="150px">
+      <p><span class="name">Kubernetes Linktree</span></p>
+      <p style="color: #ffffff; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">¡Mira mis enlaces!</p>
+    </div>
+
+    <!-- Links section 1 -->
+    <h4>MIS REDES SOCIALES</h4>
+    <div class="links-container">
+      <a id="facebookLink" href="#" target="_blank">Facebook</a>
+      <a id="instagramUser" href="#" target="_blank">Instagram</a>
+      <a id="xUser" href="#" target="_blank">X</a>
+      <a id="githubUser" href="#" target="_blank">Github</a>
+    </div>
+
+    <!-- Links section 2 -->
+    <h4>MI EXPERIENCIA</h4>
+    <div class="links-container">
+      <a id="linkedinUser" href="#" target="_blank">LinkedIn</a>
+    </div>
+
+    <!-- Links section 3 -->
+    <h4>MI BLOG</h4>
+    <div class="links-container">
+      <a id="website" href="#" target="_blank">Kubernetes Students</a>
+    </div>
+
+    <!-- Bottom section -->
+    <div class="bottom">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+      <span>2024 - Dummy website for K8s course by Yor Jaggy</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+    </div>
+
+  </div>
+  <script>
+    feather.replace()
+  </script>
+  <script type="text/javascript" src="requests.js"></script>
+</body>
+</html>

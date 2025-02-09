@@ -5,6 +5,8 @@
 ## kubectl
 ```bash
 kubectl get --help
+kubectl apply -f simple-pod.yaml
+
 kubectl get nodes
 kubectl describe NODE
 
@@ -13,12 +15,12 @@ kubectl config use-context "nombre-contexto"
 
 kubectl get pods [-A] [-o wide]
 kubectl get namespaces|ns
-kubectl get replicaset
+kubectl get replicaset|rs
 kubectl get deployments
+kubectl get service
 kubectl create namespace backends
 kubectl delete namespace backends
 
-kubectl apply -f simple-pod.yaml
 kubectl delete POD
 kubectl delete pod nginx-replicaset-<pod-id>
 
@@ -55,4 +57,6 @@ eval $(minikube docker-env)  # view from docker
 minikube dashboard
 ssh -L 33609:127.0.0.1:33609 alexh@192.168.18.76
 
+minikube service service-name # Create a tunnel
+w3m https://google.com
 ```
