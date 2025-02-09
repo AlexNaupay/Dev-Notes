@@ -18,6 +18,8 @@ kubectl get namespaces|ns
 kubectl get replicaset|rs
 kubectl get deployments
 kubectl get service
+kubectl get pv
+kubectl get pvc
 kubectl create namespace backends
 kubectl delete namespace backends
 
