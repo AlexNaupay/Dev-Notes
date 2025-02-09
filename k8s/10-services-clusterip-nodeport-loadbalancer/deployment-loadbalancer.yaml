@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
         - name: hello-app
-          image: gcr.io/google-samples/hello-app:2.0
+          image: alexnaupay/nginx-hostname:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 80
 
 ---
 apiVersion: v1
@@ -30,6 +30,9 @@ spec:
   selector:
     app: hello-loadbalancer
   ports:
-    - port: 80
+    - port: 80 # to outside
       protocol: TCP
-      targetPort: 8080
+      targetPort: 80  # for container
+
+# minikube tunnel # create a tunnel from local to minikube
+# k get service # use EXTERNAL-IP

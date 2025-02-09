@@ -55,7 +55,10 @@ export HISTSIZE=5000
 ```
 
 ### Add user to group
-`usermod -a -G groupname username`
+```bash
+usermod -a -G groupname username  # Take effect in next start
+newgrp groupname # Take effect in current bash session
+``` 
 
 ### Disks and partitions
 ```bash

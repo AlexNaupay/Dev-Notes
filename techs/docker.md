@@ -3,6 +3,8 @@
 docker build -t NAME:TAG [-f FILE.dockerfile] <.|PATH>
 # docker build -t redis-stack -f redis-stack.dockerfile .
 
+docker build --platform linux/amd64,linux/arm64 --push -t alexnaupay/nginx-hostname:latest .
+
 docker run --name CONTAINER_NAME -d -p HOST_PORT:CONTAINER_PORT IMAGE_NAME
 #docker run --name redis-stack -d -p 6379:6379 redis/redis-stack-server:latest
 
@@ -66,3 +68,6 @@ docker node inspect --pretty self
 docker swarm leave
 docker swarm leave --force 
 ```
+
+## References
+[Orbstack multiplatform](https://docs.orbstack.dev/docker/images)

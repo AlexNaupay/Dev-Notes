@@ -21,8 +21,15 @@ find <DIR|.> -type f -name "*.sql"
     diff --brief -r dir1/ dir2/
 
 ## Replace text 
-    sed -i 's/old_string/new_string/g' *
-    sed -i 's/UtilsService.log/sails.log.debug/g' * 
+```bash
+sed -i 's/old_string/new_string/' file.ext # s: substitution, /: delimiter , default: First ocurrence in each line
+sed -i 's/old_string/new_string/2' file.ext # s: substitution, /2: Second ocurrence in each line
+sed -i 's/old_string/new_string/g' file.ext # s: substitution, /g: All ocurrences in each line
+sed -i 's/old_string/new_string/g' *
+sed -i 's/UtilsService.log/sails.log.debug/g' * 
+
+# https://www.geeksforgeeks.org/sed-command-in-linux-unix-with-examples/
+```
 
 ## Replace text recursively
 find DIR -type f -name "*.php" -exec grep -Iq 'CURRENT_WORD' {} \; -exec sed -i 's/CURRENT_WORD/NEW_WORD/g' {} \;

@@ -33,6 +33,7 @@ kubectl rollout undo deployment/hello-deployment
 
 kubectl port-forward type/name local:resource
 kubectl port-forward deployment/my-deployment 8080:8080
+kubectl port-forward --address=0.0.0.0 deployment/hello-deployment 8080:80
 
 kubectl get configmap config-name
 kubectl describe configmap config-name
@@ -58,5 +59,8 @@ minikube dashboard
 ssh -L 33609:127.0.0.1:33609 alexh@192.168.18.76
 
 minikube service service-name # Create a tunnel
+# minikube tunnel # create a tunnel from local to minikube (after deploy loadbalancer)
+# k get service # use EXTERNAL-IP
 w3m https://google.com
+
 ```
