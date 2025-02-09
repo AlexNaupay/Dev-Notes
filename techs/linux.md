@@ -154,3 +154,7 @@ set tabstop=4
 set expandtab
 syntax on
 ```
+
+```bash
+less FILE  # Use / to search on content
+```
