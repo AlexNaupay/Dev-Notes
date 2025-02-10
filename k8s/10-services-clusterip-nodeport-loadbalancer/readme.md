@@ -1,5 +1,17 @@
 Clase 10: Tipos de servicios: NodePort, ClusterIP, LoadBalancer, ExternalName
 
+
+```bash
+#my-service
+port: 80 # Port of service to be used for other services
+targetPort: 8080 # Port of app (container) inside of pod
+nodePort: # Es el puerto en el que el Service estará disponible en cada nodo del clúster. Solo se usa en Services de tipo NodePort o LoadBalancer.
+
+# Dentro del clúster: Otros servicios pueden acceder a my-service usando http://my-service:80; El Service redirige el tráfico al puerto 8080 del contenedor dentro del pod
+# Desde fuera: Puedes acceder a la aplicación usando la IP de cualquier nodo del clúster y el puerto 30007
+# nodePort ((NodePort/LoadBalancer)) http://<NodeIP>:30007
+```
+
 ## NodePort
 
 Un servicio de tipo NodePort expone un Pod en un puerto específico en cada nodo del clúster. Esto permite que las aplicaciones sean accesibles desde fuera del clúster, a través de la IP del nodo y el puerto asignado.

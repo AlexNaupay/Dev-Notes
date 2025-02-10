@@ -20,6 +20,8 @@ kubectl get deployments
 kubectl get service
 kubectl get pv
 kubectl get pvc
+kubectl get daemonsets
+kubectl get statefulsets
 kubectl create namespace backends
 kubectl delete namespace backends
 

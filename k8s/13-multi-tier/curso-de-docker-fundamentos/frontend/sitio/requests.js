@@ -3,7 +3,7 @@ var requestOptions = {
     redirect: 'follow'
   };
 
-  fetch('http://localhost:5001/getMyInfo', requestOptions)
+  fetch('http://localhost:5001/get-my-info', requestOptions)
   .then(res => {
     if (!res.ok) {
       alert("HTTP error! status:" + res.status);
