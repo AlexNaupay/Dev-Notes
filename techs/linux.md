@@ -160,4 +160,7 @@ syntax on
 
 ```bash
 less FILE  # Use / to search on content
+
+# Print pretty json
+echo '{"foo": "lorem", "bar": "ipsum"}' | python -m json.tool
 ```

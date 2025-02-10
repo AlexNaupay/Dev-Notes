@@ -62,7 +62,8 @@ eval $(minikube docker-env)  # view from docker
 minikube dashboard
 ssh -L 33609:127.0.0.1:33609 alexh@192.168.18.76
 
-minikube service service-name # Create a tunnel
+minikube service list
+minikube service service-name # Create a tunnel?
 # minikube tunnel # create a tunnel from local to minikube (after deploy loadbalancer)
 # k get service # use EXTERNAL-IP
 w3m https://google.com
