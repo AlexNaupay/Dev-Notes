@@ -51,6 +51,7 @@ kubectl get pods demo-pod -o yaml|json > demo-pod2.yml
 ## minikube
 ```bash
 minikube start --driver=docker
+minikube ssh
 minikube profile list
 
 minikube addons list
@@ -64,7 +65,10 @@ ssh -L 33609:127.0.0.1:33609 alexh@192.168.18.76
 
 minikube service list
 minikube service service-name # Create a tunnel?
+
 # minikube tunnel # create a tunnel from local to minikube (after deploy loadbalancer)
+minikube tunnel --bind-address='*'
+
 # k get service # use EXTERNAL-IP
 w3m https://google.com
 

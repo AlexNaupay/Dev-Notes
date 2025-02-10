@@ -22,3 +22,7 @@ docker-compose build
 ## Backend
 
 minikube addons enable metrics-server
+
+```bash
+minikube tunnel --bind-address='*'
+```
