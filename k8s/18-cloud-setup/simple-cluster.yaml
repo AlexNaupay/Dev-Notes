@@ -5,11 +5,11 @@ kind: ClusterConfig
 
 metadata:
   name: k8s-cluster
-  region: us-west-2
+  region: us-east-1
 
 managedNodeGroups:
   - name: k8s-worker-nodes
-    instanceType: t3.medium
+    instanceType: t2.micro
     desiredCapacity: 2
 
 cloudWatch:

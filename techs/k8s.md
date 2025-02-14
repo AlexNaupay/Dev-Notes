@@ -46,6 +46,11 @@ kubectl get secret my-secret -o jsonpath='{.data.username}'
 
 kubectl get pods demo-pod -o yaml|json > demo-pod2.yml
 
+kubectl config get-contexts
+kubectl config use-context <context-name>
+
+kubectl expose pod hello-cloud --type=LoadBalancer --port=8080 --target-port=8080 --name=hello-cloud
+
 ```
 
 ## minikube
