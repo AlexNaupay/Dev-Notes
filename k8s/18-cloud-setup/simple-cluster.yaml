@@ -9,7 +9,7 @@ metadata:
 
 managedNodeGroups:
   - name: k8s-worker-nodes
-    instanceType: t2.micro
+    instanceType: t3.medium
     desiredCapacity: 2
 
 cloudWatch:
