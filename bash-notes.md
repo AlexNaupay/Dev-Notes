@@ -126,6 +126,20 @@ find DIR -type f -name "*.php" -exec grep -Iq 'CURRENT_WORD' {} \; -exec sed -i 
     down ip route del 10.10.0.0/16 via 10.10.1.1 dev ens18
     pre-down systemctl stop myservice
 
+#### MacOS (unix)
+```bash
+# https://www.unix.com/man_page/osx/8/route/
+sudo route -nv add -net 10.10.10.0/24 GATEWAY
+sudo route -nv add -net 10.10.10.0/24 192.168.100.1
+sudo route -nv add -net 10.10.10.0/24 -interface ppp0
+
+sudo route -nv add -host 10.10.10.25 192.168.100.1
+
+# On linux to forward then restart machine
+# /etc/sysctl.conf
+net.ipv4.ip_forward=1
+```
+
 # VirtualBox
     VBoxManage startvm NAME --type headless
     VBoxManage controlvm NAME poweroff|pause|reset

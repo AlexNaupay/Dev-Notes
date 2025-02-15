@@ -32,3 +32,10 @@ udevadm trigger
 ```bash
 qmrestore vzdump-qemu-140-2024_09_24-12_09_39.vma.zst 140
 ```
+
+## Rename storage
+
+```bash
+# /etc/pve/storage.cfg
+# https://youtu.be/3YDPNn0FsVo?si=-RJ3RIL7wkrgvb5p&t=492
+```

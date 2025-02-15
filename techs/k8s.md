@@ -6,9 +6,10 @@
 ```bash
 kubectl get --help
 kubectl apply -f simple-pod.yaml
+kubectl delete -f simple-pod.yaml
 
 kubectl get nodes
-kubectl describe NODE
+kubectl describe RESOURCE <name>
 
 kubectl config get-contexts
 kubectl config use-context "nombre-contexto"
@@ -24,6 +25,9 @@ kubectl get daemonsets
 kubectl get statefulsets
 kubectl create namespace backends
 kubectl delete namespace backends
+
+kubectl exec (POD | TYPE/NAME) [-c CONTAINER] [flags] -- COMMAND [args...]
+kubectl exec -it <pod-name> -- bash
 
 kubectl delete POD
 kubectl delete pod nginx-replicaset-<pod-id>

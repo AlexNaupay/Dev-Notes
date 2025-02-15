@@ -164,3 +164,12 @@ less FILE  # Use / to search on content
 # Print pretty json
 echo '{"foo": "lorem", "bar": "ipsum"}' | python -m json.tool
 ```
+
+### Alpine linux
+```bash
+apk update
+apk upgrade
+apk add curl
+apk del <package>
+
+```
