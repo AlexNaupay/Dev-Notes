@@ -134,10 +134,12 @@ sudo route -nv add -net 10.10.10.0/24 192.168.100.1
 sudo route -nv add -net 10.10.10.0/24 -interface ppp0
 
 sudo route -nv add -host 10.10.10.25 192.168.100.1
+# sudo route -nv add -host 192.168.49.2 192.168.18.76
 
+sudo route add -net 192.168.49.0/24  192.168.18.76
 # On linux to forward then restart machine
 # /etc/sysctl.conf
-net.ipv4.ip_forward=1
+net.ipv4.ip_forward=1 # allows the server to act as a router
 ```
 
 # VirtualBox

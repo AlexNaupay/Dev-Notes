@@ -1,5 +1,5 @@
 # Kubernetes
-
+# https://pabpereza.dev/blog/instalacion_kubernetes_ubuntu_server_22.04
 `minikube start --driver=docker`
 
 ## kubectl
@@ -57,6 +57,13 @@ kubectl expose pod hello-cloud --type=LoadBalancer --port=8080 --target-port=808
 
 ```
 
+## kubeadm
+```bash
+
+kubeadm config print init-defaults # join-defaults reset-defaults upgrade-defaults init-defaults
+
+```
+
 ## minikube
 ```bash
 minikube start --driver=docker
@@ -81,4 +88,146 @@ minikube tunnel --bind-address='*'
 # k get service # use EXTERNAL-IP
 w3m https://google.com
 
+```
+
+
+## Install tools (on master and workers)
+
+```bash
+#https://kubernetes.io/docs/tasks/tools/
+
+# curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
+```
+
+## Installer for Debian (v1.32) as root
+[Referencia](https://pabpereza.dev/blog/instalacion_kubernetes_ubuntu_server_22.04)
+
+```bash
+#!/usr/bin/bash
+# echo "IP_HOST k8scp" >> /etc/hosts
+apt update
+apt install -y apt-transport-https ca-certificates curl gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list
+
+apt update
+apt install -y kubelet kubeadm kubectl
+apt-mark hold kubelet kubeadm kubectl
+
+#(Optional) Enable the kubelet service before running kubeadm:
+# systemctl enable --now kubelet
+
+# /etc/fstab ; comment swap line
+sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+systemctl stop dev-sda3.swap    # Stop it now, change according to fstab
+systemctl disable dev-sda3.swap # Prevent it from starting on boot
+systemctl mask dev-sda3.swap
+update-initramfs -u
+systemctl daemon-reload
+
+mount -a
+swapoff -a
+free -h
+
+# Enable kernel modules
+modprobe overlay
+modprobe br_netfilter
+# Configure persistent loading of modules
+tee /etc/modules-load.d/containerd.conf <<EOF
+overlay
+br_netfilter
+EOF
+
+# Add some settings to sysctl
+tee /etc/sysctl.d/kubernetes.conf<<EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+EOF
+
+# Reload sysctl
+sysctl --system
+
+## Add docker repo
+apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+apt update
+apt install -y containerd.io
+# Configure containerd and start service
+mkdir -p /etc/containerd
+containerd config default | tee /etc/containerd/config.toml
+
+sed -i 's/ SystemdCgroup = false/ SystemdCgroup = true/1' /etc/containerd/config.toml
+sed -i 's/pause:3.8/pause:3.10/1' /etc/containerd/config.toml
+
+
+# restart containerd
+systemctl restart containerd
+systemctl enable containerd
+systemctl status  containerd 
+
+# If you are using containerd, check whether the SystemdCgroup is configured to true 
+# in /etc/containerd/config.toml which maybe help you resolve the issue.
+# https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd
+
+```
+
+## Setup master and workers
+```bash
+#### master
+kubeadm config images pull # as root
+# IP_HOST   k8scp  # /etc/hosts 
+
+# sudo kubeadm init --pod-network-cidr=172.24.0.0/16 --cri-socket=unix:///run/containerd/containerd.sock --upload-certs --control-plane-endpoint=k8scp
+kubeadm init --upload-certs --control-plane-endpoint=k8scp # as root
+# If you are using containerd, check whether the SystemdCgroup is configured to true 
+# in /etc/containerd/config.toml which maybe help you resolve the issue.
+
+kubectl cluster-info
+
+# Install calico with manifest (Not recommended)
+# https://github.com/projectcalico/calico/releases
+#curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests/calico.yaml
+#kubectl create -f calico.yaml 
+
+# Install calico with operator (Recommended) : AS normal user
+curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests/tigera-operator.yaml
+curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests/custom-resources.yaml
+kubectl create -f tigera-operator.yaml # --save-config  ; too long 
+# sed -ie 's/192.168.0.0/CIDR_NET/g' custom-resources.yaml
+sed -ie 's$192.168.0.0/16$172.24.0.0/16$g' custom-resources.yaml  # Used on --pod-network-cidr=172.24.0.0/16
+kubectl create -f custom-resources.yaml --save-config
+
+# Not necesary
+# https://docs.tigera.io/calico/latest/getting-started/kubernetes/hardway/install-cni-plugin
+# https://github.com/projectcalico/cni-plugin/releases
+
+echo 'source <(kubectl completion bash)' >> ~/.bashrc
+
+# ls /etc/cni/net.d/
+# ls /opt/cni/bin/
+
+# Use commands showed for master to join as cp or workers
+# To generate new token and discovery-token-ca-cert-hash;
+# Run as root onn master(cp) node
+kubeadm token create
+openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
+
+# On worker as root
+kubeadm join k8scp:6443 --token <token> --discovery-token-ca-cert-hash sha256:<discovery-token>
+
+# On another cp as root
+kubeadm join k8scp:6443 --token <token> --discovery-token-ca-cert-hash sha256:<discovery-token> --control-plane --certificate-key <cert-key>
 ```
