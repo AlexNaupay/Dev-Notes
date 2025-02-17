@@ -208,7 +208,10 @@ curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests
 curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests/custom-resources.yaml
 kubectl create -f tigera-operator.yaml # --save-config  ; too long 
 # sed -ie 's/192.168.0.0/CIDR_NET/g' custom-resources.yaml
-sed -ie 's$192.168.0.0/16$172.24.0.0/16$g' custom-resources.yaml  # Used on --pod-network-cidr=172.24.0.0/16
+sed -ie 's$192.168.0.0/16$172.24.0.0/16$g' custom-resources.yaml  # Used on --pod-network-cidr=172.24.0.0/16 or 
+# kubectl describe pod kube-controller-manager-<hostname> -n kube-system or
+# /etc/kubernetes/manifests/kube-controller-manager.yaml or
+# kubectl get installation default -o yaml -n tigera-operator
 kubectl create -f custom-resources.yaml --save-config
 
 # Not necesary
