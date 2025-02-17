@@ -203,6 +203,7 @@ kubectl cluster-info
 #kubectl create -f calico.yaml 
 
 # Install calico with operator (Recommended) : AS normal user
+# https://docs.tigera.io/calico/latest/getting-started/kubernetes/self-managed-onprem/onpremises
 curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests/tigera-operator.yaml
 curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.29.2/manifests/custom-resources.yaml
 kubectl create -f tigera-operator.yaml # --save-config  ; too long 

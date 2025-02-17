@@ -266,3 +266,12 @@ end
 bc <<< 5*5
 ```
 
+## IP 
+```bash
+# Give the interface enp0s8
+ip a | grep "enp0s8" | grep "inet " | awk '{print $2}' | cut -d/ -f1
+ip a | grep "enp0s8" | grep "inet " | sed -E 's/^.*inet ([0-9.]+)\/[0-9]+.*$/\1/'
+
+# Recommended
+ip -4 addr show enp0s8 | grep inet | awk '{print $2}' | cut -d/ -f1
+```
