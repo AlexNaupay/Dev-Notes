@@ -275,3 +275,10 @@ ip a | grep "enp0s8" | grep "inet " | sed -E 's/^.*inet ([0-9.]+)\/[0-9]+.*$/\1/
 # Recommended
 ip -4 addr show enp0s8 | grep inet | awk '{print $2}' | cut -d/ -f1
 ```
+
+```bash
+ssh usuario@servidor "comando1; comando2 && comando3 || echo 'falló'"
+#;: Ejecuta los comandos secuencialmente (aunque uno falle).
+#&&: Ejecuta el siguiente comando solo si el anterior tuvo éxito.
+#||: Ejecuta el siguiente comando solo si el anterior falló.
+```

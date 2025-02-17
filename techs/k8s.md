@@ -190,8 +190,8 @@ systemctl status  containerd
 kubeadm config images pull # as root
 # IP_HOST   k8scp  # /etc/hosts 
 
-# sudo kubeadm init --pod-network-cidr=172.24.0.0/16 --cri-socket=unix:///run/containerd/containerd.sock --upload-certs --control-plane-endpoint=k8scp
-kubeadm init --upload-certs --control-plane-endpoint=k8scp # as root
+sudo kubeadm init --pod-network-cidr=172.24.0.0/16 --cri-socket=unix:///run/containerd/containerd.sock --upload-certs --control-plane-endpoint=k8scp
+# kubeadm init --upload-certs --control-plane-endpoint=k8scp # as root
 # If you are using containerd, check whether the SystemdCgroup is configured to true 
 # in /etc/containerd/config.toml which maybe help you resolve the issue.
 
@@ -234,4 +234,10 @@ kubeadm join k8scp:6443 --token <token> --discovery-token-ca-cert-hash sha256:<d
 
 # On another cp as root
 kubeadm join k8scp:6443 --token <token> --discovery-token-ca-cert-hash sha256:<discovery-token> --control-plane --certificate-key <cert-key>
+
+
+## Reset
+kubeadm reset
+rm /etc/cni/net.d/*  # Delete all
+iptables -F ; iptables -X ; iptables -t nat -F ; iptables -t nat -X ; iptables -t mangle -F ; iptables -t mangle -X
 ```
