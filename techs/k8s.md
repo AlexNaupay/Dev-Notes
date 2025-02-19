@@ -55,6 +55,8 @@ kubectl config use-context <context-name>
 
 kubectl expose pod hello-cloud --type=LoadBalancer --port=8080 --target-port=8080 --name=hello-cloud
 
+kubectl label nodes slave-node kubernetes.io/role=worker
+
 ```
 
 ## kubeadm
