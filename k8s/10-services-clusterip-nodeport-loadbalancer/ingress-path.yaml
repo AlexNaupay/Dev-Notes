@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: helloapp.devlabs
+      http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: hello-service-clusterip # Use this with a ClusterIp service
+                port:
+                  number: 80
+# Use this with a LoadBalancer service?
