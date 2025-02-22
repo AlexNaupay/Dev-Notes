@@ -243,3 +243,46 @@ kubeadm reset
 rm /etc/cni/net.d/*  # Delete all
 iptables -F ; iptables -X ; iptables -t nat -F ; iptables -t nat -X ; iptables -t mangle -F ; iptables -t mangle -X
 ```
+
+## Install ingress-nginx
+```bash
+# https://github.com/kubernetes/ingress-nginx
+# https://kubernetes.github.io/ingress-nginx/deploy/
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.12.0/deploy/static/provider/cloud/deploy.yaml
+# mv deploy.yaml ingress-nginx-install.yaml
+```
+
+## Install metallb
+```bash
+# https://metallb.io/
+# https://metallb.io/installation/; set strictARP: true
+# actually apply the changes, returns nonzero returncode on errors only
+kubectl get configmap kube-proxy -n kube-system -o yaml | sed -e "s/strictARP: false/strictARP: true/" | kubectl apply -f - -n kube-system
+
+# Installation by manifest
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.9/config/manifests/metallb-native.yaml
+```
+
+#### Layer 2 configuration. Create a .yaml
+```yaml
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: my-first-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 192.168.1.240-192.168.1.250
+````
+
+#### L2Advertisement. Create a .yaml
+```yaml
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: my-l2-advertisement
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - my-first-pool
+```
