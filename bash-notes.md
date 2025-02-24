@@ -282,3 +282,8 @@ ssh usuario@servidor "comando1; comando2 && comando3 || echo 'falló'"
 #&&: Ejecuta el siguiente comando solo si el anterior tuvo éxito.
 #||: Ejecuta el siguiente comando solo si el anterior falló.
 ```
+
+```bash
+# The -n flag ensures that the generated files do not have an extra newline character at the end of the text
+echo -n '1f2d1e2e67df' | base64
+``` 

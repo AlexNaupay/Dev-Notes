@@ -178,5 +178,9 @@ apk update
 apk upgrade
 apk add curl
 apk del <package>
+```
 
+### Change editor
+```bash
+export EDITOR=nano
 ```

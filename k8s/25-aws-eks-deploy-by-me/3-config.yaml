@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: backend
+  name: app1-config
+data:
+  db_host: 'app1-database-service.storage.svc.cluster.local'
+      # service_name.namespace.svc.cluster.local

@@ -120,8 +120,8 @@ aws ecr create-repository --repository-name k8s-frontend --region us-east-1
 
 El resultado de la creación de los repositorios será algo como:
 
-Backend:
-```
+Backend y Frontend:
+```json lines
 {
     "repository": {
         "repositoryArn": "arn:aws:ecr:us-east-1:<your-account-id>:repository/k8s-backend",
@@ -131,9 +131,7 @@ Backend:
         ...
     }
 }
-```
 
-Frontend:
 {
     "repository": {
         "repositoryArn": "arn:aws:ecr:us-east-1:<your-account-id>:repository/k8s-frontend",

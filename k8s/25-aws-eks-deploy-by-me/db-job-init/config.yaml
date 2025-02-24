@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init-script
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS userdb;
+    USE userdb;
+
+    CREATE TABLE IF NOT EXISTS user_info (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255),
+        lastname VARCHAR(255),
+        facebook_user VARCHAR(255),
+        instagram_user VARCHAR(255),
+        x_user VARCHAR(255),
+        linkedin VARCHAR(255),
+        github_user VARCHAR(255),
+        blog VARCHAR(255),
+        author VARCHAR(255)
+    );
+
+    INSERT INTO user_info (name, lastname, facebook_user, instagram_user, x_user, linkedin, github_user, blog, author)
+    VALUES (
+        'Kubernetes',
+        'Orquestador',
+        'kubernetesio',
+        'cloudnativecomputingfoundation',
+        'K8sArchitect',
+        'company/cloud-native-computing-foundation/',
+        'kubernetes',
+        'https://kubernetes.io/',
+        'CNCF'
+    );

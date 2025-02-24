@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: 071173831616.dkr.ecr.us-east-1.amazonaws.com/k8s-frontend:v1
+        ports:
+        - containerPort: 80
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: BACKEND_API_BASE_URL
+            value: 'http://aff41eacbe5224ce6b831637c6cba26c-1410559073.us-east-1.elb.amazonaws.com'
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "64Mi"
+          limits:
+            cpu: "100m"
+            memory: "128Mi"

@@ -11,9 +11,6 @@ kubectl delete -f simple-pod.yaml
 kubectl get nodes
 kubectl describe RESOURCE <name>
 
-kubectl config get-contexts
-kubectl config use-context "nombre-contexto"
-
 kubectl get pods [-A] [-o wide]
 kubectl get namespaces|ns
 kubectl get replicaset|rs
@@ -25,6 +22,8 @@ kubectl get daemonsets
 kubectl get statefulsets
 kubectl create namespace backends
 kubectl delete namespace backends
+
+kubectl edit secrets <secret-name>
 
 kubectl exec (POD | TYPE/NAME) [-c CONTAINER] [flags] -- COMMAND [args...]
 kubectl exec -it <pod-name> -- bash
