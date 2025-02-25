@@ -13,7 +13,14 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-# ~/.zshrc  | theme: agnoster, cypher, dstufft,gnzh, kafeitu 
+# ~/.zshrc  | theme: agnoster
+# gnzh : New line 
+# cypher : Host :: Full path, but no git (For servers)
+# kafeitu : ➜ user@host full path with git 
+# af-magic : Full path with git
+# awesomepanda : ➜ Last directory with git
+# cloud, miloshadzic : Clean
+# half-life : Nice
 omz theme set cypher
 
 plugins=(
