@@ -287,3 +287,10 @@ ssh usuario@servidor "comando1; comando2 && comando3 || echo 'falló'"
 # The -n flag ensures that the generated files do not have an extra newline character at the end of the text
 echo -n '1f2d1e2e67df' | base64
 ``` 
+
+```bash
+curl -o /dev/null -s -w 'Total: %{time_total}s\n' "link-static-website-s3"
+
+aws cloudfront create-distribution --origin-domain-name link-static-website-s3 --default-root-object index.html
+
+```
