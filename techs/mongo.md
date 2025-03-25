@@ -63,6 +63,21 @@ db.createUser({ user: "root", pwd: "a_strong_password", roles: ["root"]})
 
 use mydatabase
 db.createUser({ user: "user", pwd: "userpass", roles: [{ role: "dbAdmin", db: "mydatabase" }, { role: "readWrite", db: "mydatabase" } ]})
+
+// List users
+db.getUsers()
+
+db.updateUser("user",{roles: [{ role: "readWrite", db: "mydatabase" }]})  // Overwrite all roles
+
+// Update password and overwrite roles
+db.updateUser("geoaccess",{pwd: "NEW_PASSWORD",roles: [{ role: "readWrite", db: "geoaccessdb" }]})
+
+// Drop user
+db.dropUser("username")
+
+// Role info
+db.runCommand({ rolesInfo: "dbAdmin", showPrivileges: true })
+
 ```
 
 ```bash
