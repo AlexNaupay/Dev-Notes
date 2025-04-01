@@ -296,3 +296,9 @@ nslookup
 > server dnsserver.com # Query to specific dns server
 > instagram.com
 ```
+
+### uvicorn
+
+```bash
+pm2 start "/opt/apps/my-app/venv/bin/uvicorn --root-path /dghpcybp --app-dir /opt/apps/my-app main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips 10.10.100.11 --env-file /opt/apps/environment" --name my-py-app
+```
