@@ -35,6 +35,9 @@ docker run --name mongodb5 --rm -d -p 27017:27017 -v /Users/eis/Storage/docker-s
 
 docker run --name minio --rm -d -p 9000:9000 -p 9001:9001 -v /Users/eis/Storage/docker-storage/minio-data:/data quay.io/minio/minio server /data --console-address ":9001"
 
+# docker run --name PROJECT_NAME --rm -d -v LARAVEL_PROJECT_PATH:/var/www/html  -p 8001:80  php7.2-for-laravel
+docker run --name requirements --rm -d -v /Users/eis/Code/requerimientos:/var/www/html  -p 8001:80  php7.2-for-laravel
+
 docker run --name debian --rm -d -it debian /bin/bash
 docker run --name debian11 --rm -d -p 1347:1347 -it debian:11 /bin/bash
 docker exec -it <container_name> bash
