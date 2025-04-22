@@ -297,6 +297,18 @@ nslookup
 > instagram.com
 ```
 
+## ~/.nanorc
+
+```bash
+# edit ~/.nanorc
+#set linenumbers
+set autoindent
+set tabstospaces
+set tabsize 4
+set matchbrackets "(<[{)>]}"
+set trimblanks
+```
+
 ### uvicorn
 
 ```bash
