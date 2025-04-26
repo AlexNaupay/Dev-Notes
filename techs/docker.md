@@ -23,6 +23,7 @@ docker load -i FILE_SOURCE.tar
 docker export -o CONTAINER_NAME_TARGET.tar CONTAINER
 docker import CONTAINER_NAME_TARGET.tar
 
+docker container cp PATH/SRC mongo5:/PATH/DEST
 ```
 
 ## Docker utils
