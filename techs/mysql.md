@@ -62,7 +62,7 @@ SET GLOBAL SQL_SLAVE_SKIP_COUNTER = 1;
 START SLAVE;
 ```
 
-#### Time zone
+# Time zone
 ```sql
 SELECT @@global.time_zone;
 SET GLOBAL time_zone = '-5:00'
@@ -72,11 +72,25 @@ SET time_zone = '-5:00'
  ```
 
 
- #### Install mysql old version mysql 5.7
+# Install mysql old version mysql 5.7
 ```sql
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.18-1_all.deb
 dpkg -i mysql-apt-config_0.8.18-1_all.deb
 apt update
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys NO_PUBKEY
 apt install mysql-community-server
+ ```
+
+
+# Create user with privileges
+```bash
+CREATE USER 'MY_USER'@'localhost|%' IDENTIFIED BY 'PASS';
+GRANT USAGE ON *.* TO 'MY_USER'@'localhost';  # Do nothing
+
+GRANT CREATE,REFERENCES,INDEX ON MY_DB.* TO 'MY_USER'@'localhost';  # Create tables
+GRANT SELECT, INSERT, UPDATE ON MY_DB.* TO 'MY_USER'@'localhost';  # On All My_DB.tables
+GRANT SELECT, INSERT, UPDATE, CREATE,REFERENCES,INDEX ON MY_DB.* TO `MY_USER`@`localhost`  # One line
+FLUSH PRIVILEGES;
+
+SHOW GRANTS FOR 'MY_USER'@'localhost';
  ```
