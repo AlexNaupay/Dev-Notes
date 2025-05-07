@@ -20,6 +20,30 @@ Add path to *.conf on /Library/Application Support/Herd/config/nginx/nginx.conf
 herd restart
 ```
 
+### nginx OS
+
+```bash
+brew install nginx
+brew services start nginx  # Servicio en segundo plano (incluso se ejecutará al iniciar tu Mac)
+brew services stop nginx
+brew services restart nginx
+brew services list | grep nginx
+
+# Manualmente
+sudo nginx -help
+nginx -v
+sudo nginx # start
+sudo nginx -s stop
+sudo nginx -s reload
+sudo nginx -t
+
+# Files
+/opt/homebrew/etc/nginx/nginx.conf  # config
+/opt/homebrew/etc/nginx/servers/  # servers
+/opt/homebrew/var/log/nginx/  # logs
+/opt/homebrew/var/www/  # root of sites 
+```
+
 ### Colorize nginx log
 
 `tail -f  /var/log/nginx/access.log | ccze -A |grep /some-filers/`
