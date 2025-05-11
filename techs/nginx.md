@@ -44,3 +44,74 @@ sudo nginx -t
 ### Colorize nginx log
 
 `tail -f  /var/log/nginx/access.log | ccze -A |grep /some-filers/`
+
+### Custom log format
+```sh
+http {
+    ...
+    log_format custom_access '$remote_addr - $remote_user [$time_iso8601] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"';
+    ...
+
+    access_log /var/log/nginx/access.log custom_access;
+}
+```
+
+### GeoIP module
+```sh
+# This legacy database
+apt install libnginx-mod-http-geoip geoip-database
+nginx -V 2>&1 | grep --color geoip
+
+# Carefully 
+https://www.miyuru.lk/geoiplegacy
+wget -q -O- https://dl.miyuru.lk/geoip/maxmind/country/maxmind.dat.gz | gunzip -c > /etc/nginx/maxmind-country.dat; \
+wget -q -O- https://dl.miyuru.lk/geoip/maxmind/city/maxmind.dat.gz | gunzip -c > /etc/nginx/maxmind-city.dat; \
+
+# Add if needed in /etc/nginx/nginx.conf 
+# load_module modules/ngx_http_geoip_module.so;
+
+http {
+    geoip_country /usr/share/GeoIP/GeoIP.dat;
+    geoip_city /usr/share/GeoIP/GeoLiteCity.dat;
+
+    # Optional: set a variable for logging or headers
+    geoip_proxy 0.0.0.0/0;
+
+    log_format geo '$remote_addr - $geoip_country_code $geoip_city';
+
+    access_log /var/log/nginx/access.log geo;
+
+    ...
+    map $geoip_country_code3 $from_peru {
+        default no;
+        PER     yes;
+    }
+
+    if ($from_peru = yes){
+        return 301 https://mysite.com/pe
+    }
+
+    if ($from_peru = no){
+        return 301 https://mysite.com/
+    }
+    ...
+
+    server {
+        location / {
+            add_header X-Country-Code $geoip_country_code;
+        }
+    }
+}
+
+# Available variables
+$geoip_country_code
+$geoip_country_code3
+$geoip_country_name
+
+# city.dat
+$geoip_city_continent_code
+$geoip_latitude
+$geoip_longitude
+$geoip_region
+$geoip_city
+```
