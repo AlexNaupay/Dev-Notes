@@ -115,3 +115,91 @@ $geoip_longitude
 $geoip_region
 $geoip_city
 ```
+
+
+### GeoIP2 module
+```bash
+apt update
+apt install nginx libnginx-mod-http-geoip2
+
+mkdir -p /etc/nginx/geoip2
+cd /etc/nginx/geoip2
+
+# Country database 
+wget "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=YOUR_LICENSE_KEY&suffix=tar.gz" -O GeoLite2-Country.tar.gz
+wget "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=YOUR_LICENSE_KEY&suffix=tar.gz" -O GeoLite2-City.tar.gz
+tar --strip-components=1 -xzf GeoLite2-Country.tar.gz
+tar --strip-components=1 -xzf GeoLite2-City.tar.gz
+
+nano /etc/nginx/nginx.conf
+load_module modules/ngx_http_geoip2_module.so;
+
+# Inside the http { ... }
+# Enabling auto reload will have nginx check the modification time of the database at the specified interval and reload it if it has changed.
+geoip2 /etc/nginx/geoip2/GeoLite2-Country.mmdb {
+    # auto_reload 72h | 5m | 30s;
+    auto_reload 12h;
+    $geoip2_country_code default=XX country iso_code;
+    $geoip2_country_name country names en;
+}
+
+geoip2 /etc/nginx/geoip2/GeoLite2-City.mmdb {
+    auto_reload 12h;
+    $geoip2_city_name city names en;
+
+    # $geoip2_region_code subdivisions 0 iso_code;
+    # LMA
+    # $geoip2_region_name subdivisions 0 names en;
+    # Lima Province
+
+    # $geoip2_latitude location latitude;
+    # $geoip2_longitude location longitude;
+    # $geoip2_timezone location time_zone;
+    # America/Lima
+}
+
+log_format geoip '$remote_addr - $geoip2_country_code $geoip2_country_name - $geoip2_city_name';
+access_log /var/log/nginx/access.log geoip;
+
+# Available variables
+
+```
+
+#### Install maxmind packages DB on: /usr/share/GeoIP/
+```bash
+# https://dev.maxmind.com/geoip/updating-databases/
+# https://github.com/maxmind/geoipupdate
+
+# GeoIP.conf file - used by geoipupdate program to update databases
+# from http://www.maxmind.com
+# /etc/GeoIp.conf
+AccountID YOUR_ACCOUNT_ID_HERE
+LicenseKey YOUR_LICENSE_KEY_HERE
+EditionIDs YOUR_EDITION_IDS_HERE
+# EditionIDs GeoLite2-ASN GeoLite2-City GeoLite2-Country
+
+#### Ubuntu
+# Config: /etc/GeoIp.conf
+add-apt-repository ppa:maxmind/ppa
+# Install dbs on /usr/share/GeoIP/ and geoipupdate
+apt install geoipupdate libmaxminddb0 libmaxminddb-dev mmdb-bin
+
+#### Debian 1 : Config: /etc/GeoIp.conf
+wget https://github.com/maxmind/geoipupdate/releases/download/v7.1.0/geoipupdate_7.1.0_linux_amd64.deb
+dpkg -i geoipupdate_7.1.0_linux_amd64.deb
+
+### Debian 2 : # Config: /usr/local/etc/GeoIP.conf
+wget https://github.com/maxmind/geoipupdate/releases/download/v7.1.0/geoipupdate_7.1.0_linux_amd64.tar.gz -O  geoipupdate.tar.gz
+tar zfx geoipupdate.tar.gz
+cp geoipupdate/geoipupdate /usr/local/bin/
+
+
+# Test DB
+apt install mmdb-bin
+mmdblookup --file /usr/share/GeoIP/GeoLite2-Country.mmdb --ip 8.8.8.8
+
+# https://crontab.guru/examples.html
+0 0 * * 0 /usr/bin/geoipupdate  # Sundays at 0
+@weekly /usr/bin/geoipupdate  # Sundays at 0
+
+```
