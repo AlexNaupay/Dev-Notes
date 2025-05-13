@@ -43,9 +43,14 @@ sudo nginx -t
 
 ### Colorize nginx log
 
-https://lnav.org/features
+```bash
+apt install ccze
+apt install lnav
+# https://lnav.org/features
 
-`tail -f  /var/log/nginx/access.log | ccze -A |grep /some-filers/`
+tail -f  /var/log/nginx/access.log | ccze -A |grep /some-filers/
+tail -t  /var/log/nginx/access.log
+```
 
 ### Custom log format
 ```sh
