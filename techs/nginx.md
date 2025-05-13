@@ -43,12 +43,15 @@ sudo nginx -t
 
 ### Colorize nginx log
 
+https://lnav.org/features
+
 `tail -f  /var/log/nginx/access.log | ccze -A |grep /some-filers/`
 
 ### Custom log format
 ```sh
 http {
     ...
+    log_format custom_access '$remote_addr - $gip2_country_code [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"';
     log_format custom_access '$remote_addr - $remote_user [$time_iso8601] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"';
     ...
 
