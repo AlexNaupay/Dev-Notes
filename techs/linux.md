@@ -184,3 +184,26 @@ apk del <package>
 ```bash
 export EDITOR=nano
 ```
+
+### Journalctl
+```bash
+journalctl -b  # Events from this boot
+journalctl --list-boots
+journalctl --since "2023-01-05" --until "1 hour ago"
+journalctl -b | grep LOGIN  # Fails and success
+journalctl -b _COMM=crond|sshd
+```
+
+### lnav
+```bash
+# https://lnav.org/features
+apt install lnav
+lnav -t /var/log/nginx/access.log
+lnav access*
+lnav    # Open and merge all /var/log/* files
+
+# ESC then ;
+select log_procname, count(*) from syslog_log group by log_procname;
+SELECT log_procname,log_time FROM syslog_log where log_procname='gnome-software';
+select c_ip, count(*) from access_log where cs_uri_stem like '/wsiotramite%'  group by c_ip
+```
