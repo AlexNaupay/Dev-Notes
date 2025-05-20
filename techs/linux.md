@@ -146,7 +146,7 @@ VBoxHeadless --startvm <uuid|name>
 VBoxManage controlvm <uuid|name> acpipowerbutton
 
 # Troubleshutting
-FS0
+FS0:  # : Shif + ñ
 edit startup.nsh # put: FS0:\EFI\debian\grubaa64.efi
 # CTRL+S to save, ENTER to confirm, CTRL+Q to quit editor
 reset # reset the vm
