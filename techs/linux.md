@@ -206,4 +206,5 @@ lnav    # Open and merge all /var/log/* files
 select log_procname, count(*) from syslog_log group by log_procname;
 SELECT log_procname,log_time FROM syslog_log where log_procname='gnome-software';
 select c_ip, count(*) from access_log where cs_uri_stem like '/wsiotramite%'  group by c_ip
+select c_ip, count(*) as counter from access_log group by c_ip
 ```

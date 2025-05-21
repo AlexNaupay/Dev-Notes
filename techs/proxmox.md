@@ -27,10 +27,24 @@ Disk not found
 udevadm trigger
 ```
 
+### qemu 
+
+```bash
+qm shutdown <VMID>  # Graceful
+qm stop <VMID>  # Forceful
+```
+
 ## Restore from backup file 
 
 ```bash
+# VM
+qmrestore <backup-file> <new-vm-id> [options]
 qmrestore vzdump-qemu-140-2024_09_24-12_09_39.vma.zst 140
+qmrestore vzdump-qemu-140-2024_09_24-12_09_39.vma.zst 140 --unique  # Modify network interfaces and disks to be unique
+
+# Container
+pct restore <new-container-id> <backup-file> [options]
+pct restore 104 vzdump-lxc-107-2025_05_21-11_26_57.tar.zst --storage local-lvm
 ```
 
 ## Rename storage

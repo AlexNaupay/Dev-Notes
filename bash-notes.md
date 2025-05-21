@@ -228,13 +228,6 @@ scp -i my-ssh.key test.png user@10.10.72.25:/images/
 
 ```
 
-### qemu 
-
-```bash
-qm shutdown <VMID>  # Graceful
-qm stop <VMID>  # Forceful
-```
-
 ### Redirections
 
 ```bash
