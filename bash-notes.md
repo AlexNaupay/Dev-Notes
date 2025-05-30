@@ -151,14 +151,30 @@ net.ipv4.ip_forward=1 # allows the server to act as a router
     mvn install:install-file -Dfile=target/libreria-onpe-1.0.jar -DgroupId=pe.gob.onpe.libreria -DartifactId=libreria-onpe -Dversion=1.0 -Dpackaging=jar
 
 ## pm2 nodejs process manager
-    NODE_ENV_FILE=[VAL] pm2 start app.js
-    pm2 list
-    pm2 log ID
-    pm2 show ID
-    mp2 monit
-    pm2 startup -u system_username
-    pm2 save
-    pm2 unstartup systemd
+```bash
+NODE_ENV_FILE=[VAL] pm2 start app.js
+pm2 list
+pm2 log ID
+pm2 show ID
+mp2 monit
+pm2 startup -u system_username
+pm2 save
+pm2 unstartup systemd
+
+## Enable pm2 for a user
+env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u eis --hp /home/eis
+
+# Examples:
+pm2 start npm --name "app-name-pm2" -- run start  # npm run start
+# node app --port --prod
+NODE_ENV_FILE=/etc/environment pm2 start /opt/apps/app.js --name=app-name --log /var/log/apps/appx.log -- --port 80 --prod
+```
+
+### uvicorn
+
+```bash
+pm2 start "/opt/apps/my-app/venv/bin/uvicorn --root-path /dghpcybp --app-dir /opt/apps/my-app main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips 10.10.100.11 --env-file /opt/apps/environment" --name my-py-app
+```
 
 ## Network centos
 `nmcli d`
@@ -300,10 +316,4 @@ set tabstospaces
 set tabsize 4
 set matchbrackets "(<[{)>]}"
 set trimblanks
-```
-
-### uvicorn
-
-```bash
-pm2 start "/opt/apps/my-app/venv/bin/uvicorn --root-path /dghpcybp --app-dir /opt/apps/my-app main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips 10.10.100.11 --env-file /opt/apps/environment" --name my-py-app
 ```
