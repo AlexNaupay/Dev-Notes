@@ -34,6 +34,8 @@ docker run --name mariadb --rm -d -v /Users/eis/Storage/docker-storage/mysql-dat
 
 docker run --name mongodb5 --rm -d -p 27017:27017 -v /Users/eis/Storage/docker-storage/mongo5-data:/data/db mongodb/mongodb-community-server:5.0-ubuntu2004
 
+docker run --name mongodb8 --rm -d -p 27018:27017 -v /Users/eis/Storage/docker-storage/mongo8-data:/data/db mongodb/mongodb-community-server:8.0-ubuntu2204
+
 docker run --name minio --rm -d -p 9000:9000 -p 9001:9001 -v /Users/eis/Storage/docker-storage/minio-data:/data quay.io/minio/minio server /data --console-address ":9001"
 
 # docker run --name PROJECT_NAME --rm -d -v LARAVEL_PROJECT_PATH:/var/www/html  -p 8001:80  php7.2-for-laravel
