@@ -54,6 +54,7 @@ source .venv/bin/activate
 
 uv pip install flask                # Install Flask.
 uv pip install -r requirements.txt  # Install from a requirements.txt file.
+uv pip install -r pyproject.toml
 uv pip install -e .                 # Install current project in editable mode.
 uv pip install "package @ ."        # Install current project from disk
 uv pip install "flask[dotenv]"      # Install Flask with "dotenv" extra.
