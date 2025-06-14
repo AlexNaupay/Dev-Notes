@@ -90,6 +90,8 @@ GRANT USAGE ON *.* TO 'MY_USER'@'localhost';  # Do nothing
 GRANT CREATE,REFERENCES,INDEX ON MY_DB.* TO 'MY_USER'@'localhost';  # Create tables
 GRANT SELECT, INSERT, UPDATE ON MY_DB.* TO 'MY_USER'@'localhost';  # On All My_DB.tables
 GRANT SELECT, INSERT, UPDATE, CREATE,REFERENCES,INDEX ON MY_DB.* TO `MY_USER`@`localhost`  # One line
+GRANT DELETE ON MY_DB.TABLE_NAME TO 'MY_USER'@'localhost';
+# GRANT DELETE ON MY_DB.password_resets TO 'MY_USER'@'%';   # Laravel
 FLUSH PRIVILEGES;
 
 SHOW GRANTS FOR 'MY_USER'@'localhost';
