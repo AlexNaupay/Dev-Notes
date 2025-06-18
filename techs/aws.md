@@ -32,3 +32,17 @@ aws configure get region
 
 aws cloudformation validate-template --output table|yaml|json --template-body file://template.yaml
 ```
+
+```json
+// https://www.baeldung.com/spring-ai-amazon-nova
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "bedrock:InvokeModel",
+      "Resource": "arn:aws:bedrock:REGION::foundation-model/MODEL_ID"
+    }
+  ]
+}
+```
