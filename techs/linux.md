@@ -208,3 +208,28 @@ SELECT log_procname,log_time FROM syslog_log where log_procname='gnome-software'
 select c_ip, count(*) from access_log where cs_uri_stem like '/wsiotramite%'  group by c_ip
 select c_ip, count(*) as counter from access_log group by c_ip
 ```
+
+### fsck
+```bash
+fsck /dev/sda1 # Important: begin with /
+fsck -yf /dev/sda1
+```
+
+### safe delete files
+```bash
+sudo apt install secure-delete
+srm -v -z /ruta/al/archivo # -r:recursive
+srm -l -v -r /datos/sensibles  #-l: Lento
+
+sudo apt install wipe
+wipe -r -q -D /ruta/a/la/carpeta # -r:recursivo, -D:Delete(-k:no-delete), -q:no verbose
+
+shred -n 3 -z -v -u /path/file
+# -v: Muestra el progreso (verbose)
+# -n 10: Sobrescribe 10 veces (por defecto son 3)
+# -z: Añade una pasada final con ceros para ocultar el shredding
+# -u: Elimina el archivo después de sobrescribirlo
+# For folders
+find /ruta/de/la/carpeta -type f -exec shred -v -n 3 -z -u {} \;
+rm -rf /ruta/de/la/carpeta
+```
