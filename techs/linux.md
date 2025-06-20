@@ -284,3 +284,9 @@ keyUsage = critical, keyCertSign, cRLSign
 subjectKeyIdentifier = hash
 authorityKeyIdentifier = keyid:always,issuer:always
 ```
+
+## Simple netcat chat
+```bash
+nc -nvlp 1234 || nc -nv -l 1234  || nc -v -l 50000 # As server, -l: listener
+nc -v IP 1234  # To connect on port 1234
+```
