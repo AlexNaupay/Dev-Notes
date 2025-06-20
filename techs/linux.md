@@ -234,7 +234,7 @@ find /ruta/de/la/carpeta -type f -exec shred -v -n 3 -z -u {} \;
 rm -rf /ruta/de/la/carpeta
 ```
 
-### openssl
+## openssl
 ```bash
 # https://medium.com/@noelpulido1229/how-to-add-self-signed-ssl-certificate-in-nodejs-server-ce9d53c17a9c
 openssl genrsa -aes256 -out rootCA.key 4096
@@ -242,6 +242,18 @@ openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1826 -out rootCA.crt
 
 openssl req -new -nodes -out server.csr -newkey rsa:4096 -keyout server.key
 openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 730 -sha256 -extfile server.v3.ext 
+
+## Better?
+openssl genpkey -algorithm RSA -aes-256-cbc -out rootCA.key -pkeyopt rsa_keygen_bits:4096 # generar la CA
+openssl req -x509 -new -key rootCA.key -days 3650 -out rootCA.crt -extensions v3_ca -config rootCA.cnf  # crear el certificado raíz
+
+openssl req -new -nodes -out server.csr -newkey rsa:4096 -keyout server.key
+openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 1825 -sha256 -extfile server.v3.ext
+# server.crt, server.key (nginx, nginx P:600)
+# rootCA.crt (optional public to install)
+# rootCA.key (private)
+
+
 # Double click on rootCA.crt to install
 openssl s_client -connect example.com:443 -showcerts
 ```
@@ -249,11 +261,26 @@ openssl s_client -connect example.com:443 -showcerts
 ```sh
 # server.v3.ext File
 authorityKeyIdentifier=keyid,issuer
-basicConstraints=CA:FALSE
+basicConstraints=CA:FALSE  # No sign others
 keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
 subjectAltName = @alt_names
 
 [alt_names]
 DNS.1 = localhost
+DNS.2 = devlabs.com
 IP.1 = ip address of your server
+
+# rootCA.cnf file
+[ req ]
+default_md = sha256
+distinguished_name = dn
+
+[ dn ]
+CN = Mi Root CA
+
+[ v3_ca ]
+basicConstraints = critical, CA:TRUE
+keyUsage = critical, keyCertSign, cRLSign
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer:always
 ```
