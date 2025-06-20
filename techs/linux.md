@@ -243,6 +243,7 @@ openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1826 -out rootCA.crt
 openssl req -new -nodes -out server.csr -newkey rsa:4096 -keyout server.key
 openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 730 -sha256 -extfile server.v3.ext 
 # Double click on rootCA.crt to install
+openssl s_client -connect example.com:443 -showcerts
 ```
 
 ```sh
