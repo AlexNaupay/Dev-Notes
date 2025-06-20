@@ -233,3 +233,26 @@ shred -n 3 -z -v -u /path/file
 find /ruta/de/la/carpeta -type f -exec shred -v -n 3 -z -u {} \;
 rm -rf /ruta/de/la/carpeta
 ```
+
+### openssl
+```bash
+# https://medium.com/@noelpulido1229/how-to-add-self-signed-ssl-certificate-in-nodejs-server-ce9d53c17a9c
+openssl genrsa -aes256 -out rootCA.key 4096
+openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1826 -out rootCA.crt
+
+openssl req -new -nodes -out server.csr -newkey rsa:4096 -keyout server.key
+openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 730 -sha256 -extfile server.v3.ext 
+# Double click on rootCA.crt to install
+```
+
+```sh
+# server.v3.ext File
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = localhost
+IP.1 = ip address of your server
+```
