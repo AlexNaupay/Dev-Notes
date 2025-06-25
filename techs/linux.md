@@ -244,10 +244,10 @@ openssl req -new -nodes -out server.csr -newkey rsa:4096 -keyout server.key
 openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 730 -sha256 -extfile server.v3.ext 
 
 ## Better?
-openssl genpkey -algorithm RSA -aes-256-cbc -out rootCA.key -pkeyopt rsa_keygen_bits:4096 # generar la CA
+openssl genpkey -algorithm RSA -aes-256-cbc -out rootCA.key -pkeyopt rsa_keygen_bits:4096 # generar la CA key
 openssl req -x509 -new -key rootCA.key -days 3650 -out rootCA.crt -extensions v3_ca -config rootCA.cnf  # crear el certificado raíz
 
-openssl req -new -nodes -out server.csr -newkey rsa:4096 -keyout server.key
+openssl req -new -nodes -out server.csr -newkey rsa:4096 -keyout server.key  # request
 openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 1825 -sha256 -extfile server.v3.ext
 # server.crt, server.key (nginx, nginx P:600)
 # rootCA.crt (optional public to install)
@@ -259,7 +259,7 @@ openssl s_client -connect example.com:443 -showcerts
 ```
 
 ```sh
-# server.v3.ext File
+# server.v3.ext file
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=CA:FALSE  # No sign others
 keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
@@ -269,6 +269,7 @@ subjectAltName = @alt_names
 DNS.1 = localhost
 DNS.2 = devlabs.com
 IP.1 = ip address of your server
+# server.v3.ext file end
 
 # rootCA.cnf file
 [ req ]
@@ -283,6 +284,7 @@ basicConstraints = critical, CA:TRUE
 keyUsage = critical, keyCertSign, cRLSign
 subjectKeyIdentifier = hash
 authorityKeyIdentifier = keyid:always,issuer:always
+# rootCA.cnf file end
 ```
 
 ## Simple netcat chat
