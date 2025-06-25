@@ -75,5 +75,20 @@ docker swarm leave
 docker swarm leave --force 
 ```
 
+## Docker Compose
+```bash
+docker compose restart
+docker compose restart servicio-web
+
+docker compose build  # --no-cache
+docker compose build servicio-web
+
+docker compose up --build --force-recreate -d  # build and recreate
+docker compose up --build --force-recreate -d servicio-api
+
+# Detener y eliminar contenedores, luego reiniciar (limpia contenedores antiguos):
+docker compose down && docker compose up -d
+```
+
 ## References
 [Orbstack multiplatform](https://docs.orbstack.dev/docker/images)

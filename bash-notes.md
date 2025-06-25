@@ -307,7 +307,6 @@ nslookup
 ```
 
 ## ~/.nanorc
-
 ```bash
 # edit ~/.nanorc
 #set linenumbers
@@ -316,4 +315,19 @@ set tabstospaces
 set tabsize 4
 set matchbrackets "(<[{)>]}"
 set trimblanks
+```
+
+## Copy, paste 
+```bash
+# MacOS
+cat file | pbcopy
+pbpaste  # print contents of your clipboard
+
+# Linux version of OSX pbcopy and pbpaste. With DE
+sudo apt install xsel
+alias pbcopy=’xsel --clipboard --input’
+alias pbpaste=’xsel --clipboard --output’
+# Or with xclip
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 ```

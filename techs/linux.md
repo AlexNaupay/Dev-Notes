@@ -247,7 +247,7 @@ openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateseria
 openssl genpkey -algorithm RSA -aes-256-cbc -out rootCA.key -pkeyopt rsa_keygen_bits:4096 # generar la CA key
 openssl req -x509 -new -key rootCA.key -days 3650 -out rootCA.crt -extensions v3_ca -config rootCA.cnf  # crear el certificado raíz
 
-openssl req -new -nodes -out server.csr -newkey rsa:4096 -keyout server.key  # request
+openssl req -new -nodes -out server.csr -newkey rsa:4096 -keyout server.key  # request csr and server key
 openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 1825 -sha256 -extfile server.v3.ext
 # server.crt, server.key (nginx, nginx P:600)
 # rootCA.crt (optional public to install)
@@ -277,7 +277,9 @@ default_md = sha256
 distinguished_name = dn
 
 [ dn ]
-CN = Mi Root CA
+CN = Issued By CA
+O = Devlabs
+OU = TI
 
 [ v3_ca ]
 basicConstraints = critical, CA:TRUE
