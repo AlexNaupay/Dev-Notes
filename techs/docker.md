@@ -38,6 +38,8 @@ docker run --name mongodb8 --rm -d -p 27018:27017 -v /Users/eis/Storage/docker-s
 
 docker run --name minio --rm -d -p 9000:9000 -p 9001:9001 -v /Users/eis/Storage/docker-storage/minio-data:/data quay.io/minio/minio server /data --console-address ":9001"
 
+docker run --name mailpit --rm -d -p 8025:8025 -p 1025:1025 -v /Users/eis/Storage/docker-storage/mailpit-data:/data axllent/mailpit
+
 # docker run --name PROJECT_NAME --rm -d -v LARAVEL_PROJECT_PATH:/var/www/html  -p 8001:80  php7.2-for-laravel
 docker run --name requirements --rm -d -v /Users/eis/Code/requerimientos:/var/www/html  -p 8001:80  php7.2-for-laravel
 
