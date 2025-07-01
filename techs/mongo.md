@@ -81,7 +81,7 @@ db.getUsers()
 db.updateUser("user",{roles: [{ role: "readWrite", db: "mydatabase" }]})  // Overwrite all roles
 
 // Update password and overwrite roles
-db.updateUser("geoaccess",{pwd: "NEW_PASSWORD",roles: [{ role: "readWrite", db: "geoaccessdb" }]})
+db.updateUser("user",{pwd: "NEW_PASSWORD",roles: [{ role: "readWrite", db: "mydatabase" }]})
 
 // Drop user
 db.dropUser("username")
