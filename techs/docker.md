@@ -94,3 +94,9 @@ docker compose down && docker compose up -d
 
 ## References
 [Orbstack multiplatform](https://docs.orbstack.dev/docker/images)
+
+## Delete
+```bash
+docker builder prune --all
+docker system prune -a --volumes
+```
