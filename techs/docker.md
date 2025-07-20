@@ -40,6 +40,8 @@ docker run --name minio --rm -d -p 9000:9000 -p 9001:9001 -v /Users/eis/Storage/
 
 docker run --name mailpit --rm -d -p 8025:8025 -p 1025:1025 -v /Users/eis/Storage/docker-storage/mailpit-data:/data axllent/mailpit
 
+docker run --name postgres --rm -d -p 5432:5432 -e POSTGRES_PASSWORD=_alexh -v /Users/eis/Storage/docker-storage/postgres-data:/var/lib/postgresql/data postgres:17.5-alpine3.22
+
 # docker run --name PROJECT_NAME --rm -d -v LARAVEL_PROJECT_PATH:/var/www/html  -p 8001:80  php7.2-for-laravel
 docker run --name requirements --rm -d -v /Users/eis/Code/requerimientos:/var/www/html  -p 8001:80  php7.2-for-laravel
 
