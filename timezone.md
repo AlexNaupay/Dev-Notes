@@ -1,7 +1,7 @@
 ## set timezone as EST:
 
 sudo timedatectl set-timezone EST
-
+timedatectl set-timezone America/Lima
 ## set timezone as UTC:
 
 sudo timedatectl set-timezone UTC
