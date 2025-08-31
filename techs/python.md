@@ -5,6 +5,26 @@ python -m venv .env
 source .venv/bin/activate
 ```
 
+### pyenv
+```bash
+# https://github.com/pyenv/pyenv
+# Install python build dependencies and pyenv
+pyenv install -l
+pyenv install <version>
+pyenv versions
+
+# https://github.com/pyenv/pyenv/blob/master/COMMANDS.md
+pyenv global <version>
+pyenv local <version>  # project . pyenv local --unset
+pyenv shell <version>  # session . pyenv shell --unset
+pyenv shell  # Report current version for shell
+
+pyenv uninstall [-f|--force] <version> 
+pyenv which <version>
+pyenv exec <command> [arg1 arg2...]
+pyenv root
+```
+
 ### poetry
 ```bash
 # https://python-poetry.org/docs/#installing-with-the-official-installer
