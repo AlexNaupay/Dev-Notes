@@ -11,10 +11,14 @@ sudo timedatectl set-timezone UTC
 timedatectl list-timezones
 
 ## Change hardware clock (BIOS)
-    date -s "2023-01-31 15:05:10"
-    hwclock --systohc
-    hwclock -r
+```bash
+date -s "2023-01-31 15:05:10"  # Set symtem clock
+hwclock --systohc  # Sync RTC ← from system clock
+hwclock -r
 
+#Sync System Clock → from RTC
+hwclock --hctosys
+```
 
 ## Force sync clock
 ```bash
