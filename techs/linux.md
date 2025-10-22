@@ -294,3 +294,20 @@ authorityKeyIdentifier = keyid:always,issuer:always
 nc -nvlp 1234 || nc -nv -l 1234  || nc -v -l 50000 # As server, -l: listener
 nc -v IP 1234  # To connect on port 1234
 ```
+
+## Upgrade Debian
+```bash
+# First: Update source lists
+apt update
+apt upgrade --without-new-pkgs # To avoid early conflicts
+apt full-upgrade
+apt autoremove
+
+# Optional
+apt list '?obsolete'
+apt purge '?obsolete'
+apt modernize-sources
+
+shutdown -r now
+
+```
