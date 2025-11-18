@@ -237,18 +237,21 @@ rm -rf /ruta/de/la/carpeta
 ## openssl
 ```bash
 # https://medium.com/@noelpulido1229/how-to-add-self-signed-ssl-certificate-in-nodejs-server-ce9d53c17a9c
+## Option 1
 openssl genrsa -aes256 -out rootCA.key 4096
 openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1826 -out rootCA.crt
 
 openssl req -new -nodes -out server.csr -newkey rsa:4096 -keyout server.key
 openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 730 -sha256 -extfile server.v3.ext 
 
-## Better?
+## Option 2 (Better?)
 openssl genpkey -algorithm RSA -aes-256-cbc -out rootCA.key -pkeyopt rsa_keygen_bits:4096 # generar la CA key
 openssl req -x509 -new -key rootCA.key -days 3650 -out rootCA.crt -extensions v3_ca -config rootCA.cnf  # crear el certificado raíz
 
 openssl req -new -nodes -out server.csr -newkey rsa:4096 -keyout server.key  # request csr and server key
 openssl x509 -req -in server.csr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out server.crt -days 1825 -sha256 -extfile server.v3.ext
+
+
 # server.crt, server.key (nginx, nginx P:600)
 # rootCA.crt (optional public to install)
 # rootCA.key (private)
