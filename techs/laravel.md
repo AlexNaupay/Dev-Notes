@@ -50,6 +50,8 @@ apt install -y mariadb-server
 
 # rsync -avz --partial --info=progress2 --exclude vendor  user@server:/path/to/laravel/ project/
 
+
+# https://nodesource.com/products/distributions
 curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
 apt install -y nodejs
 ```
@@ -88,6 +90,23 @@ chmod -R ug+rwx storage bootstrap/cache
 DocumentRoot /var/www/html
 # with
 DocumentRoot /storage/www
+```
+
+### Add new virtual host 
+```sh
+# /etc/apache2/ports.conf Add
+Listen 8080
+Listen 80
+
+
+<VirtualHost *:8080>
+
+    ServerAdmin webmaster@localhost
+    DocumentRoot /storage/www/sir-v2/public
+
+    ErrorLog ${APACHE_LOG_DIR}/error8080.log
+    CustomLog ${APACHE_LOG_DIR}/access8080.log combined
+</VirtualHost>
 ```
 
 
