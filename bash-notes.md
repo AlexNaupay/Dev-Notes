@@ -1,3 +1,36 @@
+## find command
+```bash
+# Basic pattern
+find [path] [criteria] [action]
+
+# Common criteria:
+# -name "pattern"    - by filename
+# -type f/d/l        - file type
+# -mtime +/-n        - modification time
+# -size +/-n         - file size
+# -user name         - file owner
+# -perm mode         - permissions
+
+# Common actions:
+# -print             - print results (default)
+# -ls                - detailed listing
+# -delete            - delete files
+# -exec command {} \; - execute command for each file
+# -exec command {} + - execute command once
+
+# find [where-to-search] [what-to-find] [what-to-do]
+# find DIR -type f -mtime +120 -ls
+find . -type f -mtime +120 -ls # list modified +120 days
+find /path/to/directory -type f -mtime +120 -delete
+find /path/to/directory -type f -mtime +120 -exec rm -f {} \;  # delete modified +120 days
+
+# -name "*.jpg"
+# -iname "filename.txt"
+# - type f | d | 
+# -mtime +30 (Older than 30 days), -7 (Modified in last 7 days), 0 (today)
+# -size +100M | -size +10M -size -100M | -1G
+```
+
 ## change mod for all files --recursive
     find <DIR|.> -type f -exec chmod 644 {} +
 
