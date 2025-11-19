@@ -232,6 +232,10 @@ ONBOOT="yes"
 
 `du -sh [directory]/*  # -s: summary, /* List directories` 
 
+`du -h | sort -h`
+
+`du -h | sort -hr`
+
 rsync -avz --partial --exclude '*/ubifoto1/' --exclude '*/ubifoto2/' --exclude '*/helicorders/' root@10.10.210.48:/data/paginasweb/fotos-tiempo-real/* .
 
 
