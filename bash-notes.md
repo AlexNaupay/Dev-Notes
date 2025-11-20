@@ -10,6 +10,7 @@ find [path] [criteria] [action]
 # -size +/-n         - file size
 # -user name         - file owner
 # -perm mode         - permissions
+# -empty             - empty files and directories 
 
 # Common actions:
 # -print             - print results (default)
