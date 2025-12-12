@@ -10,6 +10,9 @@ sudo timedatectl set-timezone UTC
 
 timedatectl list-timezones
 
+## Legacy but it works
+`dpkg-reconfigure tzdata`
+
 ## Change hardware clock (BIOS)
 ```bash
 date -s "2023-01-31 15:05:10"  # Set symtem clock
