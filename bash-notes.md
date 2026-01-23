@@ -198,8 +198,11 @@ pm2 startup -u system_username
 pm2 save
 pm2 unstartup systemd
 
-## Enable pm2 for a user
+## Enable pm2 for a user with node system (run as root)
 env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u eis --hp /home/eis
+## Enable pm2 for eis user with nvm (run as root)
+#env PATH=$PATH:/usr/bin:/home/eis/.nvm/versions/node/v16.20.2/bin pm2 startup systemd -u eis --hp /home/eis
+
 
 # Examples:
 pm2 start npm --name "app-name-pm2" -- run start  # npm run start
