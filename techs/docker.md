@@ -44,6 +44,10 @@ docker run --name postgres --rm -d -p 5432:5432 -e POSTGRES_PASSWORD=_alexh -v /
 
 docker run --name postgres18 --rm -d -v /Users/eis/Storage/docker-storage/postgres18-data:/var/lib/postgresql -e POSTGRES_PASSWORD=_alexh -p 5432:5432  postgres:18.1-trixie
 
+docker run --name couchdb --rm -d -p 5984:5984 -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=password -v couchdb_data:/opt/couchdb/data couchdb:latest
+
+docker run --name cockroachdb --rm -d -p 26257:26257 -p 8080:8080 -v cockroachdb_/cockroach/cockroach-data cockroachdb/cockroach:latest start-single-node --insecure
+
 # docker run --name PROJECT_NAME --rm -d -v LARAVEL_PROJECT_PATH:/var/www/html  -p 8001:80  php7.2-for-laravel
 docker run --name requirements --rm -d -v /Users/eis/Code/requerimientos:/var/www/html  -p 8001:80  php7.2-for-laravel
 
