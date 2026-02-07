@@ -313,4 +313,12 @@ apt modernize-sources
 
 shutdown -r now
 
+## sshfs
+```bash
+apt install sshfs
+mkdir /path/to/mount-point # where to mount remote folder on my host
+sshfs user@remote:/remote/path /path/to/mount-point
+
+fusermount -u mountpoint
+umount mountpoint # BSD and MacOS or diskutil umount force /path/to/mount-point
 ```
