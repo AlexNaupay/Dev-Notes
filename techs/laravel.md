@@ -66,9 +66,19 @@ cd LARAVEL_PROJECT
 chown -R my_user:www-data . # As root, then normal user
 find . -type f -exec chmod 644 {} \;
 find . -type d -exec chmod 755 {} \;
+# find . -type d -exec chmod 2775 {} \;  # The 2 (setgid) ensures that all new files/directories created inside keep the group www-data
 
 chgrp -R www-data storage bootstrap/cache
 chmod -R ug+rwx storage bootstrap/cache
+
+# Better with acl
+apt install acl
+setfacl -R -m g:www-data:rwx /path/to/project
+setfacl -dR -m g:www-data:rwx /path/to/project
+
+## Optionals
+# Tell git to preserve group ownership
+# git config core.sharedRepository group
 ```
 
 #### Change files (manual)
