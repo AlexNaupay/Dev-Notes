@@ -63,7 +63,8 @@ chown -R www-data:www-data /path/to/your/laravel/root/directory
 usermod -a -G www-data my_user
 
 cd LARAVEL_PROJECT
-chown -R my_user:www-data . # As root, then normal user
+# As root
+chown -R my_user:www-data . 
 find . -type f -exec chmod 644 {} \;
 find . -type d -exec chmod 755 {} \;
 # find . -type d -exec chmod 2775 {} \;  # The 2 (setgid) ensures that all new files/directories created inside keep the group www-data
