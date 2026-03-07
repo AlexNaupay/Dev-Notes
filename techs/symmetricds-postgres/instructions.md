@@ -5,6 +5,7 @@
 docker run --name lim-1 -d -p 5432:5432 -e POSTGRES_PASSWORD=_alexh -v /path/to/lim-1:/var/lib/postgresql postgres:18
 docker run --name hyo-1 -d -p 5433:5432 -e POSTGRES_PASSWORD=_alexh -v /path/to/hyo-1:/var/lib/postgresql postgres:18
 
+# ------------------------------------------------------------------------------------------------------------------------------
 # Install java
 apt update && apt install default-jre --yes # Or default-jdk
 
@@ -27,8 +28,10 @@ psql -U myuser -d myapp_db # Connect to database, or without exit from psql \c m
 CREATE TABLE "public"."clients" ("id" uuid NOT NULL DEFAULT uuidv7(),"name" varchar(255) COLLATE "pg_catalog"."default", CONSTRAINT "clients_pkey" PRIMARY KEY ("id")); # Create all tables before symmetricds
 
 apt install wget unzip nano --yes
-wget https://phoenixnap.dl.sourceforge.net/project/symmetricds/symmetricds/symmetricds-3.16/symmetric-server-3.16.9.zip -O symmetricds.zip
+wget https://phoenixnap.dl.sourceforge.net/project/symmetricds/symmetricds/symmetricds-3.16/symmetric-server-3.16.11.zip -O symmetricds.zip
 unzip symmetricds.zip
+# ------------------------------------------------------------------------------------------------------------------------------
+# Or run initial-setup.sh
 cd symmetricds
 # put nodex.properties inside engines folder
 
