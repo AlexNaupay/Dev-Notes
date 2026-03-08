@@ -37,15 +37,15 @@ INSERT INTO sym_channel (channel_id, processing_order, max_batch_size) VALUES ('
 -- Node Groups
 ------------------------------------------------------------------------------
 delete from sym_node_group;
-insert into sym_node_group (node_group_id) values ('lim-group-for-x'); -- created by bin/sys
-insert into sym_node_group (node_group_id) values ('hyo-group-for-x');
+insert into sym_node_group (node_group_id) values ('main-group'); -- created by bin/sys
+insert into sym_node_group (node_group_id) values ('region2-group');
 
 
 ------------------------------------------------------------------------------
 -- Node Group Links
 ------------------------------------------------------------------------------
-insert into sym_node_group_link (source_node_group_id, target_node_group_id, data_event_action) values ('lim-group-for-x', 'hyo-group-for-x', 'P');
-insert into sym_node_group_link (source_node_group_id, target_node_group_id, data_event_action) values ('hyo-group-for-x', 'lim-group-for-x', 'P');
+insert into sym_node_group_link (source_node_group_id, target_node_group_id, data_event_action) values ('main-group', 'region2-group', 'P');
+insert into sym_node_group_link (source_node_group_id, target_node_group_id, data_event_action) values ('region2-group', 'main-group', 'P');
 
 
 ------------------------------------------------------------------------------
@@ -53,8 +53,8 @@ insert into sym_node_group_link (source_node_group_id, target_node_group_id, dat
 ------------------------------------------------------------------------------
 -- Default router sends all data from lim to hyo and vice versa
 INSERT INTO sym_router (router_id, source_node_group_id, target_node_group_id, router_type, create_time, last_update_time) VALUES
-                       ('lim_to_hyo', 'lim-group-for-x', 'hyo-group-for-x', 'default', current_timestamp, current_timestamp),
-                       ('hyo_to_lim', 'hyo-group-for-x', 'lim-group-for-x', 'default', current_timestamp, current_timestamp);          
+                       ('main_to_region2', 'main-group', 'region2-group', 'default', current_timestamp, current_timestamp),
+                       ('region2_to_main', 'region2-group', 'main-group', 'default', current_timestamp, current_timestamp);          
 
 
 ------------------------------------------------------------------------------
@@ -69,6 +69,6 @@ INSERT INTO sym_trigger (trigger_id, source_table_name, channel_id, sync_on_inse
 ------------------------------------------------------------------------------
 -- Send all clients to all routers
 INSERT INTO sym_trigger_router (trigger_id, router_id, create_time, last_update_time) VALUES
-    ('clients_trigger', 'lim_to_hyo', current_timestamp, current_timestamp),
-    ('clients_trigger', 'hyo_to_lim', current_timestamp, current_timestamp);
+    ('clients_trigger', 'main_to_region2', current_timestamp, current_timestamp),
+    ('clients_trigger', 'region2_to_main', current_timestamp, current_timestamp);
 

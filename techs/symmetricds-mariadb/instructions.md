@@ -30,24 +30,24 @@ cd symmetricds
 # put nodex.properties inside engines folder
 
 # Root node (first node)
-bin/symadmin --engine lim1 create-sym-tables # mysql: SHOW TABLES LIKE 'sym_%';  # List symmetric tables
-bin/dbimport --engine lim1 root-setup.sql
-bin/sym --engine lim1  # Start the engine. SELECT node_id, registration_enabled FROM sym_node_security; # Check if registration is enabled
-bin/symadmin --engine lim1 open-registration hyo-group-for-x hyo1
-# SELECT node_id, registration_enabled, created_time, registration_time FROM sym_node_security; # Check if registration is enabled for hyo1
+bin/symadmin --engine main create-sym-tables # mysql: SHOW TABLES LIKE 'sym_%';  # List symmetric tables
+bin/dbimport --engine main root-setup.sql
+bin/sym --engine main  # Start the engine. SELECT node_id, registration_enabled FROM sym_node_security; # Check if registration is enabled
+bin/symadmin --engine main open-registration region2-group region2
+# SELECT node_id, registration_enabled, created_time, registration_time FROM sym_node_security; # Check if registration is enabled for region2
 
 # Non-root node
-bin/sym --engine hyo1  # Start the engine. SELECT node_id, registration_enabled FROM sym_node_security; # Check if registration is enabled
+bin/sym --engine region2  # Start the engine. SELECT node_id, registration_enabled FROM sym_node_security; # Check if registration is enabled
 ```
 
 ## Troubleshooting
 ```bash
 # If node is not registered successfully, clean up (in root node)
-DELETE FROM sym_node_security WHERE node_id = 'hyo1-id';
-DELETE FROM sym_node WHERE node_id = 'hyo1-id';
-SELECT node_id, registration_enabled, registered FROM sym_node_security; # Wanted: root | 1 | 1 . hyo1 | 0 | 1
-bin/symadmin --engine lim1 sync-triggers
-bin/symadmin --engine lim1 reload-node lim1-id
+DELETE FROM sym_node_security WHERE node_id = 'region2-id';
+DELETE FROM sym_node WHERE node_id = 'region2-id';
+SELECT node_id, registration_enabled, registered FROM sym_node_security; # Wanted: root | 1 | 1 . region2 | 0 | 1
+bin/symadmin --engine main sync-triggers
+bin/symadmin --engine main reload-node main-id
 ```
 
 ## Utils for mysql
