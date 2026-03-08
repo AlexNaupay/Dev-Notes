@@ -1,23 +1,20 @@
 #!/bin/bash
 
-apt update && apt install default-jre --yes # Or default-jdk
-apt install wget unzip nano --yes
+apt update -qqq
+apt install default-jre mariadb-client --yes -qqq # Or default-jdk
+apt install wget unzip nano --yes -qqq
 
-su - postgres -c "psql -c 'CREATE DATABASE myapp_db;'"
+mariadb -h 127.0.0.1 -u root -p_alexh -e "CREATE DATABASE IF NOT EXISTS myapp_db;"
+mariadb -h 127.0.0.1 -u root -p_alexh -e "CREATE USER IF NOT EXISTS 'myuser'@'%' IDENTIFIED BY 'mypass';"
+mariadb -h 127.0.0.1 -u root -p_alexh -e "GRANT ALL PRIVILEGES ON myapp_db.* TO 'myuser'@'%';"
+mariadb -h 127.0.0.1 -u root -p_alexh -e "GRANT PROCESS ON *.* TO 'myuser'@'%';"
+mariadb -h 127.0.0.1 -u root -p_alexh -e "FLUSH PRIVILEGES;"
 
-su - postgres -c "psql -c \"CREATE USER myuser WITH PASSWORD 'mypass';\""
-
-su - postgres -c "psql -c 'GRANT ALL PRIVILEGES ON DATABASE myapp_db TO myuser;'"
-
-su - postgres -c "psql -d myapp_db -c 'ALTER SCHEMA public OWNER TO myuser;'"
-
-su - postgres -c "psql -d myapp_db -c 'GRANT ALL ON SCHEMA public TO myuser;'"
-
-psql -U myuser -d myapp_db -c 'CREATE TABLE public.clients (
-    id uuid NOT NULL DEFAULT uuidv7(),
-    name varchar(255),
-    CONSTRAINT clients_pkey PRIMARY KEY (id)
-);'
+mariadb -h 127.0.0.1 -u myuser -pmypass -D myapp_db -e "CREATE TABLE IF NOT EXISTS clients (
+    id uuid NOT NULL DEFAULT uuid_v7(),
+    name VARCHAR(255),
+    PRIMARY KEY (id)
+);"
 
 wget https://phoenixnap.dl.sourceforge.net/project/symmetricds/symmetricds/symmetricds-3.16/symmetric-server-3.16.11.zip -O symmetricds.zip
 unzip symmetricds.zip

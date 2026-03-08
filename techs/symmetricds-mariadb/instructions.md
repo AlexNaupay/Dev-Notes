@@ -1,31 +1,25 @@
-# SymmetricDS + Postgres
+# SymmetricDS + MariaDB
 
 ```bash
-# Install Postgres
-docker run --name lim-maria --rm -d -v /Users/alexh/Storage/DockerStorage/mariadb-lim:/var/lib/mysql -e MARIADB_ROOT_PASSWORD=_alexh -p 3306:3306  mariadb
-docker run --name aqp-maria --rm -d -v /Users/alexh/Storage/DockerStorage/mariadb-aqp:/var/lib/mysql -e MARIADB_ROOT_PASSWORD=_alexh -p 3307:3306  mariadb
+# Install MariaDB
+docker run --name lim-maria -d -v /Users/alexh/Storage/DockerStorage/mariadb-lim:/var/lib/mysql -e MARIADB_ROOT_PASSWORD=_alexh -p 3306:3306  mariadb
+docker run --name aqp-maria -d -v /Users/alexh/Storage/DockerStorage/mariadb-aqp:/var/lib/mysql -e MARIADB_ROOT_PASSWORD=_alexh -p 3307:3306  mariadb
 
 # ------------------------------------------------------------------------------------------------------------------------------
 # Install java
-apt update && apt install default-jre --yes # Or default-jdk
+apt update && apt install default-jre mariadb-client --yes # Or default-jdk
 
 # Both: Create database and user, important to give privileges
-# Connect with some client ui like navicat or
-su - postgres
-psql
+# Connect with some client ui like navicat or dbeaver or
+mysql -h 127.0.0.1 -P 3306 -u root -p_alexh
 CREATE DATABASE myapp_db;
-CREATE USER myuser WITH PASSWORD 'mypass';
-GRANT ALL PRIVILEGES ON DATABASE myapp_db TO myuser;
+CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypass';
+GRANT ALL PRIVILEGES ON myapp_db.* TO 'myuser'@'%';
+GRANT PROCESS ON *.* TO 'myuser'@'%';
+FLUSH PRIVILEGES;
 exit
-psql -U postgres -d myapp_db # Connect to database, or without exit from psql \c myapp_db [myuser];
-ALTER SCHEMA public OWNER TO myuser;  # Important: myuser have to be owner
-GRANT ALL ON SCHEMA public TO myuser;
-# REASSIGN OWNED BY old_owner_username TO new_owner_username; # If you need to reassign existing objects
-\dn  # List schemas
-\q   # Quit
-exit
-psql -U myuser -d myapp_db # Connect to database, or without exit from psql \c myapp_db [myuser];
-CREATE TABLE "public"."clients" ("id" uuid NOT NULL DEFAULT uuidv7(),"name" varchar(255) COLLATE "pg_catalog"."default", CONSTRAINT "clients_pkey" PRIMARY KEY ("id")); # Create all tables before symmetricds
+mysql -h 127.0.0.1 -P 3306 -u myuser -pmypass myapp_db # Connect to database
+CREATE TABLE clients (id uuid NOT NULL DEFAULT uuid_v7(), name VARCHAR(255), PRIMARY KEY (id)); # Create all tables before symmetricds
 
 apt install wget unzip nano --yes
 wget https://phoenixnap.dl.sourceforge.net/project/symmetricds/symmetricds/symmetricds-3.16/symmetric-server-3.16.11.zip -O symmetricds.zip
@@ -36,7 +30,7 @@ cd symmetricds
 # put nodex.properties inside engines folder
 
 # Root node (first node)
-bin/symadmin --engine lim1 create-sym-tables # psql: \dt sym_*  # List symmetric tables
+bin/symadmin --engine lim1 create-sym-tables # mysql: SHOW TABLES LIKE 'sym_%';  # List symmetric tables
 bin/dbimport --engine lim1 root-setup.sql
 bin/sym --engine lim1  # Start the engine. SELECT node_id, registration_enabled FROM sym_node_security; # Check if registration is enabled
 bin/symadmin --engine lim1 open-registration hyo-group-for-x hyo1
@@ -56,24 +50,17 @@ bin/symadmin --engine lim1 sync-triggers
 bin/symadmin --engine lim1 reload-node lim1-id
 ```
 
-## Utils for psql
+## Utils for mysql
 ```sql
-SELECT current_database();  # Current database
-SELECT current_schema();  # Current schema
-ALTER SCHEMA public OWNER TO myuser;
-ALTER TABLE public.clients OWNER TO myuser;
+SELECT DATABASE();  # Current database
 
-\c myapp_db;  # Switch to database myapp_db
-\c myapp_db myuser;  # Switch to database myapp_db with user myuser
-\l  # List databases
-\l+  # List databases with more details
-\du  # List users
-\dn  # List schemas
-\q   # Quit
+USE myapp_db;  # Switch to database myapp_db
+SHOW DATABASES;  # List databases
+SELECT User, Host FROM mysql.user;  # List users
+exit   # Quit
 
-su - postgres -c "psql -d symdb -c 'select * from clients'" -- or
-psql -U postgres -d symdb -c "select * from clients" -- or
-sudo -u postgres psql -d symdb -c "select * from clients"
+mariadb -h 127.0.0.1 -P 3306 -u root -p_alexh -D symdb -e "select * from clients" -- or
+mariadb -h 127.0.0.1 -P 3306 -u root -p_alexh -D symdb -e "select * from clients"
 
-psql --version
+mariadb --version
 ```
