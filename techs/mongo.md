@@ -36,6 +36,9 @@ url: 'mongodb://usuario:contraseña@hostname1:27017,hostname2:27017,hostname3:27
 
 # Export and Import
 ```bash
+# All options are optional
+mongosh --db db_name --host localhost --port 27017 --username user [--password "pass"] --authenticationDatabase admin
+
 ### mongoexport
 mongodump --db db_name --out folder_bson_files
 mongodump --db db_name [--username user] --archive=archive_path.gz
@@ -46,6 +49,7 @@ mongodump --nsInclude="db_name.*" --archive=archive_path.gz
 ### mongoimport
 mongorestore --db db_name --drop folder_bson_files
 mongorestore --db db_name --archive=archive_path.gz
+mongorestore --db db_name_new --username root --authenticationDatabase admin --archive=db_name.tar.gz
 mongorestore [--nsInclude="db_name.*"] --archive=archive_path.gz
 ```
 
@@ -65,6 +69,7 @@ systemctl enable mongod
 ```javascript
 use admin
 db.createUser({ user: "root", pwd: "a_strong_password", roles: ["root"]})
+db.createUser({ user: "userAdmin", pwd: "a_strong_password", roles: [{ role: "userAdminAnyDatabase", db: "admin" }]})
 
 use mydatabase
 db.createUser({ user: "user", pwd: "userpass", roles: [{ role: "dbAdmin", db: "mydatabase" }, { role: "readWrite", db: "mydatabase" } ]})
@@ -90,6 +95,6 @@ nano /etc/mongod.conf
 security:
   authorization: enabled
 
-# Default --authenticationDatabase admin
+# Default --authenticationDatabase [admin or current db]
 mongosh --host localhost --port 27017 --username user [--password "pass"] --authenticationDatabase admin
 ```
