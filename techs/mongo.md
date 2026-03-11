@@ -35,25 +35,19 @@ url: 'mongodb://usuario:contraseña@hostname1:27017,hostname2:27017,hostname3:27
 
 
 # Export and Import
-
+```bash
 ### mongoexport
-`mongodump --db db_name --out folder_bson_files`
+mongodump --db db_name --out folder_bson_files
+mongodump --db db_name [--username user] --archive=archive_path.gz
 
-`mongodump --db db_name --archive=archive_path.gz`
-
- || Latest versions ||
-
-
-`mongodump --nsInclude="db_name.*" --archive=archive_path.gz`
-
-
+# Latest versions
+mongodump --nsInclude="db_name.*" --archive=archive_path.gz
 
 ### mongoimport
-`mongorestore --db db_name --drop folder_bson_files`
-
-`mongorestore --db db_name --archive=archive_path.gz`
-
-`mongorestore [--nsInclude="db_name.*"] --archive=archive_path.gz`
+mongorestore --db db_name --drop folder_bson_files
+mongorestore --db db_name --archive=archive_path.gz
+mongorestore [--nsInclude="db_name.*"] --archive=archive_path.gz
+```
 
 # Install
 ```bash
@@ -90,12 +84,12 @@ db.dropUser("username")
 db.runCommand({ rolesInfo: "dbAdmin", showPrivileges: true })
 
 ```
-
 ```bash
+# Before, first create root user on admin db (global)
 nano /etc/mongod.conf
 security:
   authorization: enabled
-```
-```bash
-mongosh --host localhost --port 27017 --username user --password "pass" --authenticationDatabase admin
+
+# Default --authenticationDatabase admin
+mongosh --host localhost --port 27017 --username user [--password "pass"] --authenticationDatabase admin
 ```

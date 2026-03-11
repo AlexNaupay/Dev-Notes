@@ -13,11 +13,19 @@
 ```bash
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-ln -s /sbin/locale-gen /bin/locale-gen
+ln -s /sbin/locale-gen /bin/locale-gen  # symlink
 ln -s /sbin/update-locale /bin/update-locale
 
 dpkg-reconfigure locales
 ```
+
+### Symlink: Symbolic link
+```bash
+# Create a symlink
+ln -s {target} {link_name}
+ln -s /path/to/original_file /path/to/symlink
+```
+
 
 ### Packages and versions
 ```bash
