@@ -10,6 +10,12 @@
 
 ### Give some permissions to user or group
 ```bash
+# User_Alias WEBADMINS = juan, maria, devuser
+# Cmnd_Alias NGINX_MGMT = /usr/sbin/nginx -t, /usr/bin/systemctl reload nginx, /usr/bin/systemctl status nginx
+# WEBADMINS ALL=(ALL) NOPASSWD: NGINX_MGMT
+
+visudo -c # check syntax
+
 # SUDO_EDITOR=nano # Set this env
 visudo
 
@@ -24,6 +30,9 @@ xuser ALL=(ALL) NOPASSWD: /usr/sbin/nginx -t, /usr/bin/systemctl reload nginx
 # All
 xuser ALL=(ALL) NOPASSWD: sudoedit /etc/nginx/sites-available/default, /usr/sbin/nginx -t, /usr/bin/systemctl reload nginx
 # Use %xgroup for a group
+
+# No shell scape, register logs
+auser ALL=(ALL) NOEXEC, LOG_INPUT, LOG_OUTPUT: /usr/sbin/nginx -t
 ```
 
 ### Locals
