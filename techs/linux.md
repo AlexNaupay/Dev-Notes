@@ -8,6 +8,23 @@
 `useradd -e 2019-01-22 <username>`  // Expire date
 
 
+### Give some permissions to user or group
+```bash
+# SUDO_EDITOR=nano # Set this env
+visudo
+
+# sudoedit with no full path, others with full path
+
+# Allow edit files
+xuser ALL=(ALL) NOPASSWD: sudoedit /etc/nginx/sites-available/default
+
+# Allow test and reload
+xuser ALL=(ALL) NOPASSWD: /usr/sbin/nginx -t, /usr/bin/systemctl reload nginx
+
+# All
+xuser ALL=(ALL) NOPASSWD: sudoedit /etc/nginx/sites-available/default, /usr/sbin/nginx -t, /usr/bin/systemctl reload nginx
+# Use %xgroup for a group
+```
 
 ### Locals
 ```bash
