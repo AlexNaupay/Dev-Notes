@@ -173,11 +173,30 @@ curl ipecho.net/plain
 curl ifconfig.co
 ```
 
+### DNS
+```bash
+dig google.com  # Get IPs
+dig -x 64.233.186.138  # Get domains
+
+host google.com  # Get IPs
+host 64.233.186.138  # Get domains
+
+nslookup google.com  # Get IPs
+nslookup 64.233.186.138  # Get domains
+
+nslookup
+> instagram.com
+> server dnsserver.com # Query to specific dns server
+> instagram.com
+```
+
 ### Virtualbox
 ```bash
 VBoxManage startvm "VM name" --type headless
 VBoxHeadless --startvm <uuid|name>
 VBoxManage controlvm <uuid|name> acpipowerbutton
+
+vmrun -T fusion start path/to.vmx nogui
 
 # Troubleshutting
 FS0:  # : Shif + ñ

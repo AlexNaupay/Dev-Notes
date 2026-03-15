@@ -51,6 +51,7 @@ docker run --name cockroachdb --rm -d -p 26257:26257 -p 8080:8080 -v cockroachdb
 # docker run --name PROJECT_NAME --rm -d -v LARAVEL_PROJECT_PATH:/var/www/html  -p 8001:80  php7.2-for-laravel
 docker run --name requirements --rm -d -v /Users/eis/Code/requerimientos:/var/www/html  -p 8001:80  php7.2-for-laravel
 
+docker run --name fedora --rm -d -it fedora /bin/bash
 docker run --name debian --rm -d -it debian /bin/bash
 docker run --name debian11 --rm -d -p 1347:1347 -it debian:11 /bin/bash
 docker exec -it <container_name> bash

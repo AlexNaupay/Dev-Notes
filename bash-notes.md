@@ -343,13 +343,6 @@ curl "https://dgacknbfyj65z.cloudfront.net/index.php?input=<script>alert('XSS')<
 curl -A "GoogleBot" "https://dgacknbfyj65z.cloudfront.net"
 ```
 
-```bash
-nslookup
-> instagram.com
-> server dnsserver.com # Query to specific dns server
-> instagram.com
-```
-
 ## ~/.nanorc
 ```bash
 # edit ~/.nanorc
