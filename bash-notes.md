@@ -213,7 +213,14 @@ NODE_ENV_FILE=/etc/environment pm2 start /opt/apps/app.js --name=app-name --log 
 ### uvicorn
 
 ```bash
-pm2 start "/opt/apps/my-app/venv/bin/uvicorn --root-path /dghpcybp --app-dir /opt/apps/my-app main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips 10.10.100.11 --env-file /opt/apps/environment" --name my-py-app
+# RUN WITH
+/path/to/my-app/.venv/bin/uvicorn --app-dir /path/to/my-app main:app --host 0.0.0.0 --port 8000
+
+# Behind a proxy with https
+/path/to/my-app/.venv/bin/uvicorn --app-dir /path/to/my-app --root-path /fast-app main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips 10.10.100.11
+
+# With pm2
+pm2 start "/path/to/my-app/.venv/bin/uvicorn --root-path /fast-app --app-dir /path/to/my-app main:app --host 0.0.0.0 --port 8000 --proxy-headers --forwarded-allow-ips 10.10.100.11 --env-file /path/to/environment" --name my-py-app
 ```
 
 ## Network centos

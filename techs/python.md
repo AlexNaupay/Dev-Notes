@@ -90,5 +90,7 @@ uv run app.py
 
 # Install python
 uv python install 3.12
+# Set python version for venv
+uv venv --python 3.12 
 
 ```
