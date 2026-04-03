@@ -27,6 +27,28 @@ Disk not found
 udevadm trigger
 ```
 
+### Mount a disk
+```bash
+lsblk  # Exists? -f: more details
+fdisk -l  # Partitions
+blkid # Filesystem
+df -h
+dmesg | grep -i disk
+
+# Create partitions
+fdisk /dev/sdb # Then o n w
+mkfs.ext4 /dev/sdb1 # Format
+
+mkdir /mnt/storage
+mount /dev/sdb1 /mnt/storage
+
+nano /etc/fstab
+    /dev/sdb1  /mnt/storage  ext4  defaults  0  0
+    UUID=<uuid_disk> <mount_point> ext4 defaults,user 0 0
+
+mount -a # Reread /etc/fstab
+```
+
 ### qemu 
 
 ```bash

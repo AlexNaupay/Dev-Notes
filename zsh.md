@@ -31,6 +31,19 @@ colorize
 )
 ```
 
+### Tips
+```bash
+# Disable history on current session
+unset HISTFILE
+HISTFILE=/dev/null zsh
+
+# This "pushes" your current history onto a stack and starts a new
+# empty history in memory that is not associated with any file.
+fc -p
+#  to "pop" and return to your normal history, or simply exit
+fc -P
+```
+
 ## References
 [OhMyZsh](https://github.com/ohmyzsh/ohmyzsh/blob/master/README.md)
 
