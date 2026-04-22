@@ -35,3 +35,19 @@ git config --global commit.gpgsign true
 # gpg: signing failed: Inappropriate ioctl for device
 export GPG_TTY=$(tty)
 ```
+
+### Delete a folder from the history
+
+```bash
+# First delete from working tree and index
+git rm -r --cached uploads
+echo "uploads/" >> .gitignore
+git add .gitignore
+git commit -m "Remove uploads directory and add to gitignore"
+
+# Delete from all commits
+# https://github.com/newren/git-filter-repo/ (install git-filter-repo)
+# wget https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo
+git filter-repo --path uploads --invert-paths
+git filter-repo --path uploads --invert-paths --force
+```
