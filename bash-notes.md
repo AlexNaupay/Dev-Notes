@@ -88,6 +88,9 @@ grep -rl "CURRENT_WORD" DIR | xargs sed -i '' 's|CURRENT_WORD|NEW_WORD|g' # MacO
 
     Usando estas opciones, el comando netstat -tulpn te mostrará una lista de todos los servicios y puertos que están en uso en tu sistema Debian.
 
+    lsof -i :8080 # lista procesos que usan el puerto 8080
+    lsof -ti:8080 # solo muestra los PIDs
+
 ## find text into file
     grep -r <TEXT_SEARCH> <.|directory>
 
