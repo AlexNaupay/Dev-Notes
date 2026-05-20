@@ -17,6 +17,9 @@ ufw allow 6000:6007/tcp
 ufw allow from 203.0.113.0/24
 ufw allow from 203.0.113.0/24 to any port 22
 
+# Insert
+ufw insert 1 deny proto tcp from 216.25.C.D/32 to any port 443 
+
 # Interfaces
 ufw allow in on eth0 to any port 80
 
