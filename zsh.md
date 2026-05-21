@@ -1,12 +1,14 @@
 # ZSH
 
 ```bash
-apt install zsh
-chsh -s $(which zsh)
+#!/usr/bin/env bash
+ 
+set -e
+apt install zsh git -y
+# chsh -s $(which zsh)
 
 # OhMyZsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 
 # Plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -23,12 +25,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 # half-life : Nice
 omz theme set cypher
 
-plugins=(
-git
-zsh-autosuggestions
-zsh-syntax-highlighting
-colorize
-)
+sed -i 's/^plugins=.*/plugins=(git zsh-autosuggestions zsh-syntax-highlighting colorize)/' ~/.zshrc
 ```
 
 ### Tips
