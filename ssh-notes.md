@@ -59,3 +59,19 @@ EOF
 
 cat script_local.sh | ssh usuario@servidor bash
 ```
+
+## SSH Agent Forwarding
+```bash
+# Start the SSH agent on local machine
+eval $(ssh-agent -s)
+
+# Add SSH key to the agent
+ssh-add ~/.ssh/google_compute_engine
+
+# Connect to the first VM with the -A flag to enable forwarding
+gcloud compute ssh vm-name --ssh-flag="-A"
+ssh user@host --ssh-flag="-A"
+# Then
+ssh user@host
+ssh host
+```
