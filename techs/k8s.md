@@ -52,6 +52,11 @@ kubectl get pods demo-pod -o yaml|json > demo-pod2.yml
 kubectl config get-contexts
 kubectl config use-context <context-name>
 
+# Delete contexts
+kubectl config delete-cluster <cluster-name> # Remove the cluster definition
+kubectl config delete-user <user-name> # Remove the user credentials
+kubectl config delete-context <context-name>
+
 kubectl expose pod hello-cloud --type=LoadBalancer --port=8080 --target-port=8080 --name=hello-cloud
 
 kubectl label nodes slave-node kubernetes.io/role=worker
