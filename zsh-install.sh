@@ -2,7 +2,7 @@
  
 set -e
 
-sudo apt install zsh git -y
+sudo apt install zsh git curl -y
 #chsh -s $(which zsh)
 
 # OhMyZsh
