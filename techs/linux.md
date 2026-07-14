@@ -365,6 +365,7 @@ apt purge '?obsolete'
 apt modernize-sources
 
 shutdown -r now
+```
 
 ## sshfs
 ```bash
@@ -374,4 +375,18 @@ sshfs user@remote:/remote/path /path/to/mount-point
 
 fusermount -u mountpoint
 umount mountpoint # BSD and MacOS or diskutil umount force /path/to/mount-point
+```
+
+## Run n times
+```bash
+for i in {1..5}; do your_command; done
+
+while true; do your_command; sleep 1; done # CTRL+C to stop
+
+watch -n 1 your_command # every 1 second
+
+seq 10 | xargs -I {} -P 5 your_command # 10 times, 5 at once
+
+# https://github.com/rakyll/hey
+hey -n 1000 -c 100 https://example.com
 ```
