@@ -39,6 +39,9 @@ HISTFILE=/dev/null zsh
 fc -p
 #  to "pop" and return to your normal history, or simply exit
 fc -P
+
+# Change theme on current session
+ZSH_THEME="awesomepanda" source $ZSH/oh-my-zsh.sh
 ```
 
 ## References
